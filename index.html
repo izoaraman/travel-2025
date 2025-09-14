@@ -1,0 +1,659 @@
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 data-i18n="appTitle">2025 Family Trip Itinerary</h1>
+                    <div class="date-range" id="dateRange">Sep 20 - Oct 17, 2025</div>
+                </div>
+                <div class="controls">
+                    <div class="lang-toggle" role="group" aria-label="Language selection">
+                        <button class="active" data-lang="en" aria-pressed="true">EN</button>
+                        <button data-lang="ko" aria-pressed="false">KR</button>
+                    </div>
+                    <button class="share-btn" data-i18n="share" aria-label="Share itinerary">Share</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="country-tabs" role="navigation" aria-label="Country navigation">
+        <div class="tabs-container" id="tabsContainer"></div>
+    </nav>
+    
+    <main class="content">
+        <div class="container" id="mainContent"></div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore</p>
+                <p class="disclaimer" data-i18n="disclaimer">Weather is an estimate based on monthly norms.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+    
+    <script>
+        // i18n Dictionary
+        const i18n = {
+            en: {
+                appTitle: "2025 Family Trip Itinerary",
+                byCountry: "By Country",
+                date: "Date",
+                city: "City",
+                activities: "Activities",
+                transport: "Transport",
+                lodging: "Lodging",
+                notes: "Notes",
+                weather: "Estimated Weather",
+                share: "Share",
+                linkCopied: "Link copied",
+                disclaimer: "Weather is an estimate based on monthly norms.",
+                countries: { India: "India", Vietnam: "Vietnam", Taiwan: "Taiwan", Singapore: "Singapore" }
+            },
+            ko: {
+                appTitle: "2025 가족 여행 일정",
+                byCountry: "국가별",
+                date: "날짜",
+                city: "도시",
+                activities: "활동",
+                transport: "이동수단",
+                lodging: "숙소",
+                notes: "메모",
+                weather: "예상 날씨",
+                share: "공유",
+                linkCopied: "링크가 복사되었습니다",
+                disclaimer: "날씨는 월별 평균을 기반으로 한 추정치입니다.",
+                countries: { India: "인도", Vietnam: "베트남", Taiwan: "대만", Singapore: "싱가포르" }
+            }
+        };
+        
+        // Weather lookup table
+        const weatherData = {
+            "Delhi": { 9: { min: 24, max: 35, condition: "Hot" } },
+            "Agra": { 9: { min: 27, max: 37, condition: "Hot" } },
+            "Haridwar": { 9: { min: 23, max: 36, condition: "Hot" } },
+            "Rishikesh": { 9: { min: 23, max: 36, condition: "Hot" } },
+            "Hanoi": { 9: { min: 25, max: 31, condition: "Humid" }, 10: { min: 23, max: 29, condition: "Mild" } },
+            "Halong Bay": { 9: { min: 24, max: 30, condition: "Humid" }, 10: { min: 23, max: 29, condition: "Mild" } },
+            "Danang": { 10: { min: 23, max: 29, condition: "Mild" } },
+            "Hoi An": { 10: { min: 23, max: 29, condition: "Mild" } },
+            "Ho Chi Minh": { 10: { min: 24, max: 32, condition: "Humid" } },
+            "Jiufen": { 10: { min: 24, max: 28, condition: "Mild" } },
+            "Taipei": { 10: { min: 24, max: 28, condition: "Mild" } },
+            "Alishan": { 10: { min: 23, max: 31, condition: "Cool" } },
+            "Chiayi": { 10: { min: 23, max: 32, condition: "Warm" } },
+            "Taoyuan": { 10: { min: 24, max: 28, condition: "Mild" } },
+            "Singapore": { 10: { min: 27, max: 30, condition: "Humid" } }
+        };
+        
+        // Parse itinerary data
+        const itinerary = {
+            trips: [
+                {
+                    country: "India",
+                    segments: [
+                        {
+                            date: "2025-09-20",
+                            city: "Delhi",
+                            activities: ["Y+J arrive in Delhi", "Flight from Sydney via Singapore"],
+                            transport: "SYD-SIN Scoot TR3, SIN-DEL Air India AI2383",
+                            lodging: "",
+                            notes: "Visa Application ID: I004VCD54E25, I004VCD55025",
+                            weather: { minC: 24, maxC: 35, condition: "Hot", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-21",
+                            city: "Agra",
+                            activities: ["Visit the Taj Mahal", "Taj Mahal sunrise 6-9am", "Mehtab Bagh sunset"],
+                            transport: "New Delhi to Agra (12002 Rani Kamlapati Shatabdi Express)",
+                            lodging: "Aman Homestay",
+                            notes: "",
+                            weather: { minC: 27, maxC: 37, condition: "Hot", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-22",
+                            city: "Haridwar",
+                            activities: ["Check out Haridwar", "Triveni Ghat evening Aaarti"],
+                            transport: "Agra Cantt to Hazrat Nizamuddin, New Delhi to Haridwar",
+                            lodging: "Hotel Le Roi Haridwar",
+                            notes: "",
+                            weather: { minC: 23, maxC: 36, condition: "Hot", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-23",
+                            city: "Rishikesh",
+                            activities: ["Relax in Rishikesh", "Yoga classes", "Neer Garh Waterfall", "Lakshman Jhula Bridge"],
+                            transport: "Haridwar to Rishikesh",
+                            lodging: "Hilltop Swiss Cottage",
+                            notes: "",
+                            weather: { minC: 23, maxC: 36, condition: "Hot", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-24",
+                            city: "Rishikesh",
+                            activities: ["Relax in Rishikesh", "Yoga classes", "Beatles Ashram"],
+                            transport: "",
+                            lodging: "Hilltop Swiss Cottage",
+                            notes: "",
+                            weather: { minC: 24, maxC: 37, condition: "Hot", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-25",
+                            city: "Delhi",
+                            activities: ["Join day-tour in Delhi", "Amin Tours pickup at Hazrat Nizamuddin"],
+                            transport: "Rishikesh to Delhi Hazrat Nizamuddin (18478 Kalinga Utkal Express)",
+                            lodging: "",
+                            notes: "Family Flight Korean Air KE0453 to Hanoi at 18:45",
+                            weather: { minC: 25, maxC: 34, condition: "Hot", confidence: 0.7 }
+                        }
+                    ],
+                    dateRange: { start: "2025-09-20", end: "2025-09-25" }
+                },
+                {
+                    country: "Vietnam",
+                    segments: [
+                        {
+                            date: "2025-09-26",
+                            city: "Hanoi",
+                            activities: ["Meet family in Hanoi", "St Joseph Cathedral", "Train street", "Old quarter"],
+                            transport: "DEL-HAN VietJet VJ972",
+                            lodging: "Crescendo Apt Quang Khanh",
+                            notes: "",
+                            weather: { minC: 24, maxC: 31, condition: "Humid", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-27",
+                            city: "Hanoi",
+                            activities: ["Rest, eat, enjoy Hanoi"],
+                            transport: "",
+                            lodging: "Crescendo Apt Quang Khanh",
+                            notes: "",
+                            weather: { minC: 24, maxC: 30, condition: "Humid", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-28",
+                            city: "Halong Bay",
+                            activities: ["Go to Halong Bay", "Join Signature Halong Cruise", "Enjoy the cruise"],
+                            transport: "Transfer to Halong International Port",
+                            lodging: "Signature Halong Cruise",
+                            notes: "Bai Tu Long Bay",
+                            weather: { minC: 24, maxC: 30, condition: "Humid", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-29",
+                            city: "Halong Bay",
+                            activities: ["Continue cruise"],
+                            transport: "",
+                            lodging: "Signature Halong Cruise",
+                            notes: "Bai Tu Long Bay",
+                            weather: { minC: 24, maxC: 30, condition: "Humid", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-09-30",
+                            city: "Hanoi",
+                            activities: ["Back to Halong Bay", "Travel to Hanoi", "Board overnight train to Danang"],
+                            transport: "Hanoi Railway Station SE3 to Danang",
+                            lodging: "On train",
+                            notes: "",
+                            weather: { minC: 23, maxC: 29, condition: "Pleasant", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-01",
+                            city: "Hoi An",
+                            activities: ["Arrive in Danang", "Check in at resort"],
+                            transport: "Train arrival at Danang Station",
+                            lodging: "Zest Resort & Spa Hoi An",
+                            notes: "",
+                            weather: { minC: 24, maxC: 27, condition: "Rainy", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-02",
+                            city: "Hoi An",
+                            activities: ["Rest, eat, swim, enjoy Hoi An"],
+                            transport: "",
+                            lodging: "Zest Resort & Spa Hoi An",
+                            notes: "",
+                            weather: { minC: 24, maxC: 27, condition: "Rainy", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-03",
+                            city: "Hoi An",
+                            activities: ["Rest, eat, swim, enjoy Hoi An"],
+                            transport: "",
+                            lodging: "Zest Resort & Spa Hoi An",
+                            notes: "",
+                            weather: { minC: 24, maxC: 27, condition: "Rainy", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-04",
+                            city: "Danang",
+                            activities: ["Move to hotel"],
+                            transport: "",
+                            lodging: "Emblem Sea",
+                            notes: "The Ocean Villas, Truong Sa (3 bedroom villa)",
+                            weather: { minC: 24, maxC: 30, condition: "Rainy", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-05",
+                            city: "Danang",
+                            activities: ["Rest, eat, swim, enjoy Danang"],
+                            transport: "",
+                            lodging: "Emblem Sea",
+                            notes: "",
+                            weather: { minC: 24, maxC: 30, condition: "Rainy", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-06",
+                            city: "Danang",
+                            activities: ["Rest, eat, swim, enjoy Danang"],
+                            transport: "",
+                            lodging: "Emblem Sea",
+                            notes: "",
+                            weather: { minC: 24, maxC: 30, condition: "Rainy", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-07",
+                            city: "Ho Chi Minh",
+                            activities: ["Afternoon flight to Ho Chi Minh"],
+                            transport: "DAD-SGN Vietjet VJ649",
+                            lodging: "Lumier Horizon Suites",
+                            notes: "",
+                            weather: { minC: 24, maxC: 32, condition: "Humid", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-08",
+                            city: "Ho Chi Minh",
+                            activities: ["Sightseeing in Ho Chi Minh", "Family fly back to Korea", "Y+J fly to Taiwan"],
+                            transport: "Family SGN-ICN Korean Air KE0476, Y+J SGN-TPE VietJet VJ840",
+                            lodging: "",
+                            notes: "",
+                            weather: { minC: 24, maxC: 32, condition: "Humid", confidence: 0.7 }
+                        }
+                    ],
+                    dateRange: { start: "2025-09-26", end: "2025-10-08" }
+                },
+                {
+                    country: "Taiwan",
+                    segments: [
+                        {
+                            date: "2025-10-09",
+                            city: "Jiufen",
+                            activities: ["Y+J visit Jiufen", "瑞芳-十分/基隆/深澳/九份", "夜市：基隆庙口"],
+                            transport: "",
+                            lodging: "山午 雲在屾房",
+                            notes: "",
+                            weather: { minC: 24, maxC: 28, condition: "Mild", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-10",
+                            city: "Taipei",
+                            activities: ["Y+J go to Taipei", "大安森林公园", "光华商场", "三创生活园区", "夜市：辽宁街"],
+                            transport: "",
+                            lodging: "OwlStay FlipFlop Hostel Garden",
+                            notes: "",
+                            weather: { minC: 24, maxC: 28, condition: "Mild", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-11",
+                            city: "Taipei",
+                            activities: ["Y+J relax in Taipei", "河滨公园", "永康街", "大安区", "夜市：士林 饶河街"],
+                            transport: "",
+                            lodging: "OwlStay FlipFlop Hostel Garden",
+                            notes: "",
+                            weather: { minC: 23, maxC: 27, condition: "Mild", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-12",
+                            city: "Alishan",
+                            activities: ["Y+J go to Alishan", "台北-嘉义 高铁", "嘉义-阿里山", "夕阳 观星"],
+                            transport: "Taipei to Chiayi HSR, Chiayi to Alishan",
+                            lodging: "高山青大饭店",
+                            notes: "",
+                            weather: { minC: 23, maxC: 31, condition: "Cool", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-13",
+                            city: "Chiayi",
+                            activities: ["Y+J enjoy Alishan and go to Chiayi", "日出", "散步，下山", "夜市：嘉义文化"],
+                            transport: "",
+                            lodging: "Light Hostel",
+                            notes: "",
+                            weather: { minC: 23, maxC: 32, condition: "Warm", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-14",
+                            city: "Taoyuan",
+                            activities: ["Y+J go to Taoyuan and fly to Singapore", "嘉义-桃园 高铁", "桃园神社", "忠烈祠步道", "夜市：桃园观光"],
+                            transport: "Chiayi to Taoyuan HSR",
+                            lodging: "",
+                            notes: "",
+                            weather: { minC: 24, maxC: 28, condition: "Mild", confidence: 0.7 }
+                        }
+                    ],
+                    dateRange: { start: "2025-10-09", end: "2025-10-14" }
+                },
+                {
+                    country: "Singapore",
+                    segments: [
+                        {
+                            date: "2025-10-15",
+                            city: "Singapore",
+                            activities: ["Y+J arrive in Singapore"],
+                            transport: "TPE-SIN Scoot TR897",
+                            lodging: "Cube Social Boutique Capsule Hotel",
+                            notes: "",
+                            weather: { minC: 27, maxC: 30, condition: "Humid", confidence: 0.7 }
+                        },
+                        {
+                            date: "2025-10-16",
+                            city: "Singapore",
+                            activities: ["Y+J enjoy Singapore and fly back to Sydney"],
+                            transport: "SIN-SYD Scoot TR2",
+                            lodging: "",
+                            notes: "",
+                            weather: { minC: 27, maxC: 29, condition: "Humid", confidence: 0.7 }
+                        }
+                    ],
+                    dateRange: { start: "2025-10-15", end: "2025-10-16" }
+                }
+            ],
+            meta: { 
+                generatedAt: new Date().toISOString(), 
+                sourceDocs: ["2025 Family Trip Simple", "2025 India Vietnam Taiwan Singapore"] 
+            }
+        };
+        
+        // Current language
+        let currentLang = 'en';
+        
+        // Helper function for translations
+        function t(key) {
+            const keys = key.split('.');
+            let value = i18n[currentLang];
+            for (const k of keys) {
+                value = value[k];
+            }
+            return value || key;
+        }
+        
+        // Format date
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T00:00:00');
+            const weekdays = currentLang === 'en' ? 
+                ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] :
+                ['일', '월', '화', '수', '목', '금', '토'];
+            return {
+                full: dateStr,
+                weekday: weekdays[date.getDay()]
+            };
+        }
+        
+        // Get weather icon
+        function getWeatherIcon(condition) {
+            const icons = {
+                'Hot': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+                'Humid': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
+                'Mild': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+                'Cool': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+                'Warm': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>'
+            };
+            return icons[condition] || icons['Mild'];
+        }
+        
+        // Get confidence dots
+        function getConfidenceDots(confidence) {
+            if (confidence >= 0.7) return '●●●';
+            if (confidence >= 0.5) return '●●○';
+            return '●○○';
+        }
+        
+        // Get country flag
+        function getCountryFlag(country) {
+            const flags = {
+                'India': '🇮🇳',
+                'Vietnam': '🇻🇳',
+                'Taiwan': '🇹🇼',
+                'Singapore': '🇸🇬'
+            };
+            return flags[country] || '';
+        }
+        
+        // Render tabs
+        function renderTabs() {
+            const container = document.getElementById('tabsContainer');
+            const countries = ['India', 'Vietnam', 'Taiwan', 'Singapore'];
+            
+            container.innerHTML = countries.map(country => `
+                <button class="tab" data-country="${country}" aria-label="View ${country} itinerary">
+                    ${getCountryFlag(country)} ${t('countries.' + country)}
+                </button>
+            `).join('');
+            
+            // Set first tab as active
+            container.querySelector('.tab').classList.add('active');
+        }
+        
+        // Render content
+        function renderContent() {
+            const container = document.getElementById('mainContent');
+            const html = itinerary.trips.map(trip => {
+                const segments = trip.segments.map(segment => {
+                    const date = formatDate(segment.date);
+                    return `
+                        <div class="day-card">
+                            <div class="day-header">
+                                <div>
+                                    <span class="day-date">${date.full}</span>
+                                    <span class="day-weekday">(${date.weekday})</span>
+                                </div>
+                                ${segment.weather ? `
+                                    <div class="weather-chip" title="${t('weather')}">
+                                        ${getWeatherIcon(segment.weather.condition)}
+                                        <span>${segment.weather.minC}–${segment.weather.maxC}°C · ${segment.weather.condition}</span>
+                                        <span class="confidence-dots">${getConfidenceDots(segment.weather.confidence)}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="city-name">${segment.city}${segment.region ? ', ' + segment.region : ''}</div>
+                            ${segment.activities && segment.activities.length > 0 ? `
+                                <div class="detail-row">
+                                    <div class="detail-label">${t('activities')}</div>
+                                    <ul class="activities-list detail-content">
+                                        ${segment.activities.map(activity => `<li>${activity}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            ${segment.transport ? `
+                                <div class="detail-row">
+                                    <div class="detail-label">${t('transport')}</div>
+                                    <div class="detail-content">${segment.transport}</div>
+                                </div>
+                            ` : ''}
+                            ${segment.lodging ? `
+                                <div class="detail-row">
+                                    <div class="detail-label">${t('lodging')}</div>
+                                    <div class="detail-content" title="${segment.notes}">${segment.lodging}</div>
+                                </div>
+                            ` : ''}
+                            ${segment.notes && !segment.lodging ? `
+                                <div class="detail-row">
+                                    <div class="detail-label">${t('notes')}</div>
+                                    <div class="detail-content">${segment.notes}</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                return `
+                    <div class="country-section" data-country="${trip.country}">
+                        <h2 class="country-header">
+                            <span class="country-flag">${getCountryFlag(trip.country)}</span>
+                            ${t('countries.' + trip.country)}
+                        </h2>
+                        ${segments}
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+            
+            // Show first country
+            container.querySelector('.country-section').classList.add('active');
+        }
+        
+        // Update UI text
+        function updateUIText() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.dataset.i18n);
+            });
+            
+            // Update date range
+            const startDate = new Date('2025-09-20');
+            const endDate = new Date('2025-10-17');
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById('dateRange').textContent = 
+                `${startDate.toLocaleDateString(currentLang === 'ko' ? 'ko-KR' : 'en-US', options)} - ${endDate.toLocaleDateString(currentLang === 'ko' ? 'ko-KR' : 'en-US', options)}`;
+            
+            // Re-render dynamic content
+            renderTabs();
+            renderContent();
+        }
+        
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Handle tab clicks
+        function handleTabClick(e) {
+            if (!e.target.classList.contains('tab')) return;
+            
+            const country = e.target.dataset.country;
+            
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-pressed', 'false');
+            });
+            e.target.classList.add('active');
+            e.target.setAttribute('aria-pressed', 'true');
+            
+            // Update content
+            document.querySelectorAll('.country-section').forEach(section => {
+                section.classList.toggle('active', section.dataset.country === country);
+            });
+            
+            // Update URL
+            window.location.hash = country.toLowerCase();
+            
+            // Smooth scroll to content
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Handle language toggle
+        function handleLangToggle(e) {
+            if (!e.target.dataset.lang) return;
+            
+            const lang = e.target.dataset.lang;
+            if (lang === currentLang) return;
+            
+            currentLang = lang;
+            
+            // Update toggle buttons
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+                btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
+            });
+            
+            // Update URL
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.replaceState({}, '', url);
+            
+            // Save preference
+            localStorage.setItem('preferredLang', lang);
+            
+            // Update UI
+            updateUIText();
+        }
+        
+        // Handle share
+        async function handleShare() {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                showToast(t('linkCopied'));
+            } catch (err) {
+                // Fallback
+                const input = document.createElement('input');
+                input.value = window.location.href;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showToast(t('linkCopied'));
+            }
+        }
+        
+        // Handle deep links
+        function handleDeepLink() {
+            const hash = window.location.hash.slice(1);
+            if (!hash) return;
+            
+            const tab = document.querySelector(`.tab[data-country="${hash.charAt(0).toUpperCase() + hash.slice(1)}"]`);
+            if (tab) {
+                tab.click();
+            }
+        }
+        
+        // Initialize
+        function init() {
+            // Check for language preference
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLang');
+            
+            if (urlLang && (urlLang === 'en' || urlLang === 'ko')) {
+                currentLang = urlLang;
+            } else if (savedLang) {
+                currentLang = savedLang;
+            }
+            
+            // Set initial language toggle state
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+                btn.setAttribute('aria-pressed', btn.dataset.lang === currentLang ? 'true' : 'false');
+            });
+            
+            // Initial render
+            updateUIText();
+            
+            // Event listeners
+            document.getElementById('tabsContainer').addEventListener('click', handleTabClick);
+            document.querySelector('.lang-toggle').addEventListener('click', handleLangToggle);
+            document.querySelector('.share-btn').addEventListener('click', handleShare);
+            
+            // Handle deep links
+            handleDeepLink();
+            window.addEventListener('hashchange', handleDeepLink);
+        }
+        
+        // Start app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

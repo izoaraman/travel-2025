@@ -1,46 +1,4 @@
-// Update all weather data
-        async function updateAllWeather() {
-            const btn = document.getElementById('weatherUpdateBtn');
-            const btnText = btn.querySelector('span');
-            const originalText = btnText.textContent;
-            
-            // Show updating state
-            btnText.textContent = t('updatingWeather');
-            btn.disabled = true;
-            
-            try {
-                // Update weather for all segments
-                for (let trip of itinerary.trips) {
-                    for (let segment of trip.segments) {
-                        const newWeather = await fetchWeatherData(segment.city, segment.date);
-                        if (newWeather) {
-                            segment.weather = newWeather;
-                        }
-                    }
-                }
-                
-                // Re-render content with updated weather
-                renderContent();
-                
-                // Show success message
-                showToast(t('weatherUpdated'));
-                
-                // Add live indicator if using real API
-                const indicator = document.createElement('div');
-                indicator.className = 'weather-live-indicator';
-                btn.appendChild(indicator);
-                
-            } catch (error) {
-                console.error('Weather update failed:', error);
-                showToast(t('weatherUpdateFailed'));
-            } finally {
-                // Reset button state
-                setTimeout(() => {
-                    btnText.textContent = originalText;
-                    btn.disabled = false;
-                }, 1000);
-            }
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,14 +10,6 @@
     <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMUNDRkM5O3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzEzMTgzODtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIGZpbGw9InVybCgjZ3JhZCkiLz48dGV4dCB4PSI2MDAiIHk9IjMwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjcwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MjAyNSBGYW1pbHkgQWR2ZW50dXJlPC90ZXh0Pjx0ZXh0IHg9IjYwMCIgeT0iMzgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzIiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW5kaWEg4oCiIFZpZXRuYW0g4oCiIFRhaXdhbiDigKIgU2luZ2Fwb3JlPC90ZXh0Pjwvc3ZnPg==">
     
     <style>
-        <!--
-        Generated: 2025-01-01T00:00:00Z
-        Sources: 2025 Family Trip Simple; 2025 India Vietnam Taiwan Singapore
-        Parsed segments: 28
-        Countries detected: India, Vietnam, Taiwan, Singapore
-        Notes: Modern UI with animations and visual enhancements
-        -->
-        
         * {
             margin: 0;
             padding: 0;
@@ -108,11 +58,6 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
         }
         
         body {
@@ -457,6 +402,17 @@
             position: relative;
         }
         
+        .day-location a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+        
+        .day-location a:hover {
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+        
         .location-icon {
             width: 20px;
             height: 20px;
@@ -466,33 +422,6 @@
         
         .day-card-body {
             padding: 20px;
-        }
-        
-        /* Weather Badge */
-        .weather-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 8px 12px;
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--dark-blue);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .weather-icon {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .weather-temp {
-            font-weight: 700;
         }
         
         /* Activity Pills */
@@ -567,6 +496,18 @@
             font-size: 14px;
             color: var(--dark-blue);
             line-height: 1.5;
+        }
+        
+        .detail-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .detail-text a:hover {
+            border-bottom-color: var(--primary);
         }
         
         /* Statistics Bar */
@@ -688,26 +629,44 @@
             border-radius: 100px;
         }
         
-        /* Loading Skeleton */
-        .skeleton {
-            background: linear-gradient(90deg, var(--gray-light) 25%, #f0f0f0 50%, var(--gray-light) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
+        .disclaimer {
+            margin-top: 8px;
+            font-style: italic;
         }
         
-        /* Responsive Design */
+        /* Mobile Responsive Design */
         @media (max-width: 768px) {
             .hero {
-                padding: 40px 20px 30px;
+                padding: 40px 16px 30px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-dates {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+            
+            .controls-bar {
+                padding: 12px 16px;
             }
             
             .controls-container {
                 flex-direction: column;
                 align-items: stretch;
+                gap: 12px;
             }
             
             .country-pills {
                 width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .country-pill {
+                padding: 8px 16px;
+                font-size: 13px;
             }
             
             .action-buttons {
@@ -715,19 +674,39 @@
                 justify-content: space-between;
             }
             
-            .days-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .stats-bar {
+                padding: 24px 16px;
+                margin: 24px 0;
             }
             
             .stats-container {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
+                gap: 20px;
+            }
+            
+            .main-content {
+                padding: 0 16px;
+                margin: 24px auto;
             }
             
             .country-header {
-                flex-direction: column;
-                text-align: center;
+                padding: 20px;
+                flex-direction: row;
+                text-align: left;
+                margin-bottom: 24px;
+            }
+            
+            .days-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .day-card-header {
+                padding: 16px;
+            }
+            
+            .day-card-body {
+                padding: 16px;
             }
         }
         
@@ -737,21 +716,6 @@
                 transition: none !important;
             }
         }
-        
-        /* Print Styles */
-        @media print {
-            .controls-bar,
-            .action-buttons,
-            footer {
-                display: none;
-            }
-            
-            .day-card {
-                break-inside: avoid;
-                box-shadow: none;
-                border: 1px solid var(--gray-light);
-            }
-        }
     </style>
 </head>
 <body>
@@ -759,7 +723,6 @@
     <header class="hero">
         <div class="hero-content">
             <h1 data-i18n="heroTitle">2025 Family Adventure</h1>
-            <p class="hero-subtitle" data-i18n="heroSubtitle">An Epic Journey Across Four Amazing Countries</p>
             <div class="hero-dates">
                 <svg class="date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -827,8 +790,8 @@
             <p class="footer-text" data-i18n="footerSources">
                 Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore
             </p>
-            <p class="footer-text" data-i18n="disclaimer">
-                Weather forecasts are estimates based on historical monthly averages.
+            <p class="footer-text disclaimer" data-i18n="disclaimer">
+                All dates, activities, and accommodations are subject to confirmation.
             </p>
         </div>
     </footer>
@@ -843,7 +806,11 @@
     </div>
     
     <script>
-        // i18n Dictionary
+        // Global variables
+        let currentLanguage = 'en';
+        let activeCountry = 'India';
+
+        // i18n Dictionary - Simplified and working
         const i18n = {
             en: {
                 heroTitle: "2025 Family Adventure",
@@ -856,20 +823,15 @@
                 transport: "Transport",
                 lodging: "Accommodation",
                 notes: "Notes",
-                weather: "Weather",
                 linkCopied: "Link copied to clipboard!",
                 footerTitle: "Travel Information",
                 footerSources: "Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore",
-                disclaimer: "Weather forecasts are estimates based on historical monthly averages.",
+                disclaimer: "All dates, activities, and accommodations are subject to confirmation.",
                 countries: { 
                     India: "India", 
                     Vietnam: "Vietnam", 
                     Taiwan: "Taiwan", 
                     Singapore: "Singapore" 
-                },
-                months: {
-                    Sep: "September",
-                    Oct: "October"
                 }
             },
             ko: {
@@ -883,48 +845,36 @@
                 transport: "이동수단",
                 lodging: "숙소",
                 notes: "메모",
-                weather: "날씨",
                 linkCopied: "링크가 클립보드에 복사되었습니다!",
                 footerTitle: "여행 정보",
                 footerSources: "출처: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore",
-                disclaimer: "날씨 예보는 과거 월별 평균을 기반으로 한 추정치입니다.",
+                disclaimer: "모든 날짜, 활동 및 숙소는 확정되어야 합니다.",
                 countries: { 
                     India: "인도", 
                     Vietnam: "베트남", 
                     Taiwan: "대만", 
                     Singapore: "싱가포르" 
-                },
-                months: {
-                    Sep: "9월",
-                    Oct: "10월"
                 }
             }
         };
-        
-        // Weather lookup table - Updated with accurate data
-        const weatherData = {
-            // India - September
-            "Delhi": { 9: { min: 24, max: 34, condition: "Hot & Humid" } },
-            "Agra": { 9: { min: 24, max: 34, condition: "Hot" } },
-            "Haridwar": { 9: { min: 22, max: 32, condition: "Warm" } },
-            "Rishikesh": { 9: { min: 22, max: 32, condition: "Warm" } },
-            // Vietnam
-            "Hanoi": { 9: { min: 24, max: 31, condition: "Humid" }, 10: { min: 20, max: 27, condition: "Pleasant" } },
-            "Halong Bay": { 9: { min: 24, max: 30, condition: "Humid" }, 10: { min: 22, max: 28, condition: "Pleasant" } },
-            "Danang": { 10: { min: 24, max: 30, condition: "Rainy" } },
-            "Hoi An": { 10: { min: 24, max: 27, condition: "Rainy" } },
-            "Ho Chi Minh": { 10: { min: 24, max: 32, condition: "Humid" } },
-            // Taiwan
-            "Jiufen": { 10: { min: 22, max: 27, condition: "Pleasant" } },
-            "Taipei": { 10: { min: 22, max: 27, condition: "Pleasant" } },
-            "Alishan": { 10: { min: 14, max: 21, condition: "Cool" } },
-            "Chiayi": { 10: { min: 23, max: 31, condition: "Warm" } },
-            "Taoyuan": { 10: { min: 22, max: 27, condition: "Pleasant" } },
-            // Singapore
-            "Singapore": { 10: { min: 26, max: 31, condition: "Hot & Humid" } }
+
+        // Simplified city translations
+        const cityNames = {
+            en: {
+                "Delhi": "Delhi", "Agra": "Agra", "Haridwar": "Haridwar", "Rishikesh": "Rishikesh",
+                "Hanoi": "Hanoi", "Halong Bay": "Halong Bay", "Hoi An": "Hoi An", "Danang": "Danang", 
+                "Ho Chi Minh": "Ho Chi Minh", "Jiufen": "Jiufen", "Taipei": "Taipei", "Alishan": "Alishan",
+                "Chiayi": "Chiayi", "Taoyuan": "Taoyuan", "Singapore": "Singapore"
+            },
+            ko: {
+                "Delhi": "델리", "Agra": "아그라", "Haridwar": "하리드와르", "Rishikesh": "리시케시",
+                "Hanoi": "하노이", "Halong Bay": "하롱베이", "Hoi An": "호이안", "Danang": "다낭",
+                "Ho Chi Minh": "호치민", "Jiufen": "지우펀", "Taipei": "타이베이", "Alishan": "아리산",
+                "Chiayi": "자이", "Taoyuan": "타오위안", "Singapore": "싱가포르"
+            }
         };
-        
-        // Parse itinerary data
+
+        // Complete itinerary data
         const itinerary = {
             trips: [
                 {
@@ -932,796 +882,456 @@
                     emoji: "🇮🇳",
                     segments: [
                         {
-                            date: "2025-09-20",
-                            city: "Delhi",
+                            date: "2025-09-20", city: "Delhi",
                             activities: ["Y+J arrive in Delhi", "Flight from Sydney via Singapore"],
                             transport: "SYD-SIN Scoot TR3, SIN-DEL Air India AI2383",
-                            lodging: "",
-                            notes: "Visa Application ID: I004VCD54E25, I004VCD55025",
-                            weather: { minC: 24, maxC: 34, condition: "Hot & Humid", confidence: 0.7 }
+                            lodging: "Airport Transit", notes: "Visa Application ID: I004VCD54E25, I004VCD55025"
                         },
                         {
-                            date: "2025-09-21",
-                            city: "Agra",
+                            date: "2025-09-21", city: "Agra",
                             activities: ["Visit the Taj Mahal", "Taj Mahal sunrise 6-9am", "Mehtab Bagh sunset"],
                             transport: "New Delhi to Agra (12002 Rani Kamlapati Shatabdi Express)",
-                            lodging: "Aman Homestay",
-                            notes: "",
-                            weather: { minC: 24, maxC: 34, condition: "Hot", confidence: 0.7 }
+                            lodging: "Aman Homestay", notes: ""
                         },
                         {
-                            date: "2025-09-22",
-                            city: "Haridwar",
+                            date: "2025-09-22", city: "Haridwar",
                             activities: ["Check out Haridwar", "Triveni Ghat evening Aaarti"],
                             transport: "Agra Cantt to Hazrat Nizamuddin, New Delhi to Haridwar",
-                            lodging: "Hotel Le Roi Haridwar",
-                            notes: "",
-                            weather: { minC: 22, maxC: 32, condition: "Warm", confidence: 0.7 }
+                            lodging: "Hotel Le Roi Haridwar", notes: ""
                         },
                         {
-                            date: "2025-09-23",
-                            city: "Rishikesh",
+                            date: "2025-09-23", city: "Rishikesh",
                             activities: ["Relax in Rishikesh", "Yoga classes", "Neer Garh Waterfall", "Lakshman Jhula Bridge"],
-                            transport: "Haridwar to Rishikesh",
-                            lodging: "Hilltop Swiss Cottage",
-                            notes: "",
-                            weather: { minC: 22, maxC: 32, condition: "Warm", confidence: 0.7 }
+                            transport: "Haridwar to Rishikesh", lodging: "Hilltop Swiss Cottage", notes: ""
                         },
                         {
-                            date: "2025-09-24",
-                            city: "Rishikesh",
+                            date: "2025-09-24", city: "Rishikesh",
                             activities: ["Relax in Rishikesh", "Yoga classes", "Beatles Ashram"],
-                            transport: "",
-                            lodging: "Hilltop Swiss Cottage",
-                            notes: "",
-                            weather: { minC: 22, maxC: 32, condition: "Warm", confidence: 0.7 }
+                            transport: "", lodging: "Hilltop Swiss Cottage", notes: ""
                         },
                         {
-                            date: "2025-09-25",
-                            city: "Delhi",
+                            date: "2025-09-25", city: "Delhi",
                             activities: ["Join day-tour in Delhi", "Amin Tours pickup at Hazrat Nizamuddin"],
                             transport: "Rishikesh to Delhi Hazrat Nizamuddin (18478 Kalinga Utkal Express)",
-                            lodging: "",
-                            notes: "Family Flight Korean Air KE0453 to Hanoi at 18:45",
-                            weather: { minC: 24, maxC: 34, condition: "Hot & Humid", confidence: 0.7 }
+                            lodging: "Airport Transit", notes: "Family Flight Korean Air KE0453 to Hanoi at 18:45"
                         }
-                    ],
-                    dateRange: { start: "2025-09-20", end: "2025-09-25" }
+                    ]
                 },
                 {
                     country: "Vietnam",
                     emoji: "🇻🇳",
                     segments: [
                         {
-                            date: "2025-09-26",
-                            city: "Hanoi",
+                            date: "2025-09-26", city: "Hanoi",
                             activities: ["Meet family in Hanoi", "St Joseph Cathedral", "Train street", "Old quarter"],
-                            transport: "DEL-HAN VietJet VJ972",
-                            lodging: "Crescendo Apt Quang Khanh",
-                            notes: "",
-                            weather: { minC: 24, maxC: 31, condition: "Humid", confidence: 0.7 }
+                            transport: "DEL-HAN VietJet VJ972", lodging: "Crescendo Apt Quang Khanh", notes: ""
                         },
                         {
-                            date: "2025-09-27",
-                            city: "Hanoi",
-                            activities: ["Rest, eat, enjoy Hanoi"],
-                            transport: "",
-                            lodging: "Crescendo Apt Quang Khanh",
-                            notes: "",
-                            weather: { minC: 24, maxC: 30, condition: "Humid", confidence: 0.7 }
+                            date: "2025-09-27", city: "Hanoi",
+                            activities: ["Rest, eat, enjoy Hanoi"], transport: "",
+                            lodging: "Crescendo Apt Quang Khanh", notes: ""
                         },
                         {
-                            date: "2025-09-28",
-                            city: "Halong Bay",
+                            date: "2025-09-28", city: "Halong Bay",
                             activities: ["Go to Halong Bay", "Join Signature Halong Cruise", "Enjoy the cruise"],
-                            transport: "Transfer to Halong International Port",
-                            lodging: "Signature Halong Cruise",
-                            notes: "Bai Tu Long Bay",
-                            weather: { minC: 24, maxC: 30, condition: "Humid", confidence: 0.7 }
+                            transport: "Transfer to Halong International Port", lodging: "Signature Halong Cruise",
+                            notes: "Bai Tu Long Bay"
                         },
                         {
-                            date: "2025-09-29",
-                            city: "Halong Bay",
-                            activities: ["Continue cruise"],
-                            transport: "",
-                            lodging: "Signature Halong Cruise",
-                            notes: "Bai Tu Long Bay",
-                            weather: { minC: 24, maxC: 30, condition: "Humid", confidence: 0.7 }
+                            date: "2025-09-29", city: "Halong Bay",
+                            activities: ["Continue cruise"], transport: "",
+                            lodging: "Signature Halong Cruise", notes: "Bai Tu Long Bay"
                         },
                         {
-                            date: "2025-09-30",
-                            city: "Hanoi",
+                            date: "2025-09-30", city: "Hanoi",
                             activities: ["Back to Halong Bay", "Travel to Hanoi", "Board overnight train to Danang"],
-                            transport: "Hanoi Railway Station SE3 to Danang",
-                            lodging: "On train",
-                            notes: "",
-                            weather: { minC: 23, maxC: 29, condition: "Pleasant", confidence: 0.7 }
+                            transport: "Hanoi Railway Station SE3 to Danang", lodging: "On train", notes: ""
                         },
                         {
-                            date: "2025-10-01",
-                            city: "Hoi An",
+                            date: "2025-10-01", city: "Hoi An",
                             activities: ["Arrive in Danang", "Check in at resort"],
-                            transport: "Train arrival at Danang Station",
-                            lodging: "Zest Resort & Spa Hoi An",
-                            notes: "",
-                            weather: { minC: 24, maxC: 27, condition: "Rainy", confidence: 0.7 }
+                            transport: "Train arrival at Danang Station", lodging: "Zest Resort & Spa Hoi An", notes: ""
                         },
                         {
-                            date: "2025-10-02",
-                            city: "Hoi An",
-                            activities: ["Rest, eat, swim, enjoy Hoi An"],
-                            transport: "",
-                            lodging: "Zest Resort & Spa Hoi An",
-                            notes: "",
-                            weather: { minC: 24, maxC: 27, condition: "Rainy", confidence: 0.7 }
+                            date: "2025-10-02", city: "Hoi An",
+                            activities: ["Rest, eat, swim, enjoy Hoi An"], transport: "",
+                            lodging: "Zest Resort & Spa Hoi An", notes: ""
                         },
                         {
-                            date: "2025-10-03",
-                            city: "Hoi An",
-                            activities: ["Rest, eat, swim, enjoy Hoi An"],
-                            transport: "",
-                            lodging: "Zest Resort & Spa Hoi An",
-                            notes: "",
-                            weather: { minC: 24, maxC: 27, condition: "Rainy", confidence: 0.7 }
+                            date: "2025-10-03", city: "Hoi An",
+                            activities: ["Rest, eat, swim, enjoy Hoi An"], transport: "",
+                            lodging: "Zest Resort & Spa Hoi An", notes: ""
                         },
                         {
-                            date: "2025-10-04",
-                            city: "Danang",
-                            activities: ["Move to hotel"],
-                            transport: "",
-                            lodging: "Emblem Sea",
-                            notes: "The Ocean Villas, Truong Sa (3 bedroom villa)",
-                            weather: { minC: 24, maxC: 30, condition: "Rainy", confidence: 0.7 }
+                            date: "2025-10-04", city: "Danang",
+                            activities: ["Move to hotel"], transport: "",
+                            lodging: "Emblem Sea", notes: "The Ocean Villas, Truong Sa (3 bedroom villa)"
                         },
                         {
-                            date: "2025-10-05",
-                            city: "Danang",
-                            activities: ["Rest, eat, swim, enjoy Danang"],
-                            transport: "",
-                            lodging: "Emblem Sea",
-                            notes: "",
-                            weather: { minC: 24, maxC: 30, condition: "Rainy", confidence: 0.7 }
+                            date: "2025-10-05", city: "Danang",
+                            activities: ["Rest, eat, swim, enjoy Danang"], transport: "",
+                            lodging: "Emblem Sea", notes: ""
                         },
                         {
-                            date: "2025-10-06",
-                            city: "Danang",
-                            activities: ["Rest, eat, swim, enjoy Danang"],
-                            transport: "",
-                            lodging: "Emblem Sea",
-                            notes: "",
-                            weather: { minC: 24, maxC: 30, condition: "Rainy", confidence: 0.7 }
+                            date: "2025-10-06", city: "Danang",
+                            activities: ["Rest, eat, swim, enjoy Danang"], transport: "",
+                            lodging: "Emblem Sea", notes: ""
                         },
                         {
-                            date: "2025-10-07",
-                            city: "Ho Chi Minh",
-                            activities: ["Afternoon flight to Ho Chi Minh"],
-                            transport: "DAD-SGN Vietjet VJ649",
-                            lodging: "Lumier Horizon Suites",
-                            notes: "",
-                            weather: { minC: 24, maxC: 32, condition: "Humid", confidence: 0.7 }
+                            date: "2025-10-07", city: "Ho Chi Minh",
+                            activities: ["Afternoon flight to Ho Chi Minh"], transport: "DAD-SGN Vietjet VJ649",
+                            lodging: "Lumier Horizon Suites", notes: ""
                         },
                         {
-                            date: "2025-10-08",
-                            city: "Ho Chi Minh",
-                            activities: ["Sightseeing in Ho Chi Minh", "Family fly back to Korea", "Y+J fly to Taiwan"],
-                            transport: "Family SGN-ICN Korean Air KE0476, Y+J SGN-TPE VietJet VJ840",
-                            lodging: "",
-                            notes: "",
-                            weather: { minC: 24, maxC: 32, condition: "Humid", confidence: 0.7 }
+                            date: "2025-10-08", city: "Ho Chi Minh",
+                            activities: ["Sightseeing in Ho Chi Minh"], transport: "",
+                            lodging: "Lumier Horizon Suites", notes: ""
+                        },
+                        {
+                            date: "2025-10-09", city: "Ho Chi Minh",
+                            activities: ["Family fly back to Korea", "Y+J fly to Taiwan"],
+                            transport: "SGN-TPE", lodging: "In flight", notes: ""
                         }
-                    ],
-                    dateRange: { start: "2025-09-26", end: "2025-10-08" }
+                    ]
                 },
                 {
                     country: "Taiwan",
                     emoji: "🇹🇼",
                     segments: [
                         {
-                            date: "2025-10-09",
-                            city: "Jiufen",
+                            date: "2025-10-10", city: "Jiufen",
                             activities: ["Y+J visit Jiufen", "瑞芳-十分/基隆/深澳/九份", "夜市：基隆庙口"],
-                            transport: "",
-                            lodging: "山午 雲在屾房",
-                            notes: "",
-                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
+                            transport: "TPE Airport to Jiufen", lodging: "山午 雲在屾房", notes: ""
                         },
                         {
-                            date: "2025-10-10",
-                            city: "Taipei",
+                            date: "2025-10-11", city: "Taipei",
                             activities: ["Y+J go to Taipei", "大安森林公园", "光华商场", "三创生活园区", "夜市：辽宁街"],
-                            transport: "",
-                            lodging: "OwlStay FlipFlop Hostel Garden",
-                            notes: "",
-                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
+                            transport: "Jiufen to Taipei", lodging: "OwlStay FlipFlop Hostel Garden", notes: ""
                         },
                         {
-                            date: "2025-10-11",
-                            city: "Taipei",
+                            date: "2025-10-12", city: "Taipei",
                             activities: ["Y+J relax in Taipei", "河滨公园", "永康街", "大安区", "夜市：士林 饶河街"],
-                            transport: "",
-                            lodging: "OwlStay FlipFlop Hostel Garden",
-                            notes: "",
-                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
+                            transport: "", lodging: "OwlStay FlipFlop Hostel Garden", notes: ""
                         },
                         {
-                            date: "2025-10-12",
-                            city: "Alishan",
+                            date: "2025-10-13", city: "Alishan",
                             activities: ["Y+J go to Alishan", "台北-嘉义 高铁", "嘉义-阿里山", "夕阳 观星"],
-                            transport: "Taipei to Chiayi HSR, Chiayi to Alishan",
-                            lodging: "高山青大饭店",
-                            notes: "",
-                            weather: { minC: 14, maxC: 21, condition: "Cool", confidence: 0.7 }
+                            transport: "Taipei to Chiayi HSR, Chiayi to Alishan", lodging: "高山青大饭店", notes: ""
                         },
                         {
-                            date: "2025-10-13",
-                            city: "Chiayi",
+                            date: "2025-10-14", city: "Chiayi",
                             activities: ["Y+J enjoy Alishan and go to Chiayi", "日出", "散步，下山", "夜市：嘉义文化"],
-                            transport: "",
-                            lodging: "Light Hostel",
-                            notes: "",
-                            weather: { minC: 23, maxC: 31, condition: "Warm", confidence: 0.7 }
+                            transport: "Alishan to Chiayi", lodging: "Light Hostel", notes: ""
                         },
                         {
-                            date: "2025-10-14",
-                            city: "Taoyuan",
+                            date: "2025-10-15", city: "Taoyuan",
                             activities: ["Y+J go to Taoyuan and fly to Singapore", "嘉义-桃园 高铁", "桃园神社", "忠烈祠步道", "夜市：桃园观光"],
-                            transport: "Chiayi to Taoyuan HSR",
-                            lodging: "",
-                            notes: "",
-                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
+                            transport: "Chiayi to Taoyuan HSR", lodging: "Airport Hotel", notes: ""
                         }
-                    ],
-                    dateRange: { start: "2025-10-09", end: "2025-10-14" }
+                    ]
                 },
                 {
                     country: "Singapore",
                     emoji: "🇸🇬",
                     segments: [
                         {
-                            date: "2025-10-15",
-                            city: "Singapore",
-                            activities: ["Y+J arrive in Singapore"],
-                            transport: "TPE-SIN Scoot TR897",
-                            lodging: "Cube Social Boutique Capsule Hotel",
-                            notes: "",
-                            weather: { minC: 26, maxC: 31, condition: "Hot & Humid", confidence: 0.7 }
+                            date: "2025-10-16", city: "Singapore",
+                            activities: ["Y+J arrive in Singapore"], transport: "TPE-SIN",
+                            lodging: "Cube Social Boutique Capsule Hotel", notes: ""
                         },
                         {
-                            date: "2025-10-16",
-                            city: "Singapore",
-                            activities: ["Y+J enjoy Singapore and fly back to Sydney"],
-                            transport: "SIN-SYD Scoot TR2",
-                            lodging: "",
-                            notes: "",
-                            weather: { minC: 26, maxC: 31, condition: "Hot & Humid", confidence: 0.7 }
+                            date: "2025-10-17", city: "Singapore",
+                            activities: ["Y+J enjoy Singapore and fly back to Sydney"], transport: "SIN-SYD",
+                            lodging: "In flight", notes: "End of adventure"
                         }
-                    ],
-                    dateRange: { start: "2025-10-15", end: "2025-10-16" }
+                    ]
                 }
-            ],
-            meta: { 
-                generatedAt: new Date().toISOString(), 
-                sourceDocs: ["2025 Family Trip Simple", "2025 India Vietnam Taiwan Singapore"] 
-            }
+            ]
         };
-        
-        // Current state
-        let currentLang = 'en';
-        let currentCountry = 'India';
-        
-        // Helper function for translations
-        function t(key) {
+
+        // Utility functions
+        function formatDate(dateStr, lang = 'en') {
+            const date = new Date(dateStr);
+            const options = { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric'
+            };
+            return date.toLocaleDateString(lang === 'ko' ? 'ko-KR' : 'en-US', options);
+        }
+
+        function translate(key, lang = currentLanguage) {
             const keys = key.split('.');
-            let value = i18n[currentLang];
+            let value = i18n[lang];
+            
             for (const k of keys) {
-                value = value[k];
+                if (value && typeof value === 'object') {
+                    value = value[k];
+                } else {
+                    break;
+                }
             }
+            
             return value || key;
         }
-        
-        // Format date
-        function formatDate(dateStr) {
-            const date = new Date(dateStr + 'T00:00:00');
-            const weekdays = currentLang === 'en' ? 
-                ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] :
-                ['일', '월', '화', '수', '목', '금', '토'];
-            const months = currentLang === 'en' ?
-                ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] :
-                ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
-            return {
-                day: date.getDate(),
-                month: months[date.getMonth()],
-                weekday: weekdays[date.getDay()],
-                full: dateStr
-            };
+
+        function translateCity(city, lang = currentLanguage) {
+            return cityNames[lang]?.[city] || city;
         }
-        
-        // Get weather icon SVG
-        function getWeatherIcon(condition) {
-            const icons = {
-                'Hot & Humid': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>',
-                'Hot': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>',
-                'Warm': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg>',
-                'Humid': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
-                'Pleasant': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
-                'Rainy': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><line x1="9" y1="21" x2="9" y2="24"/><line x1="15" y1="21" x2="15" y2="24"/></svg>',
-                'Cool': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16.5A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 7.5"/></svg>'
-            };
-            return icons[condition] || icons['Pleasant'];
-        }
-        
-        // Render country pills
-        function renderCountryPills() {
+
+        // UI Generation functions
+        function createCountryPills() {
             const container = document.getElementById('countryPills');
-            const countries = itinerary.trips.map(trip => ({
-                name: trip.country,
-                emoji: trip.emoji
-            }));
+            container.innerHTML = '';
             
-            container.innerHTML = countries.map(country => `
-                <button class="country-pill ${country.name === currentCountry ? 'active' : ''}" 
-                        data-country="${country.name}" 
-                        role="tab" 
-                        aria-selected="${country.name === currentCountry}">
-                    <span class="country-emoji">${country.emoji}</span>
-                    <span>${t('countries.' + country.name)}</span>
-                </button>
-            `).join('');
+            itinerary.trips.forEach((trip, index) => {
+                const pill = document.createElement('button');
+                pill.className = `country-pill ${index === 0 ? 'active' : ''}`;
+                pill.role = 'tab';
+                pill.setAttribute('aria-selected', index === 0);
+                pill.innerHTML = `
+                    <span class="country-emoji">${trip.emoji}</span>
+                    <span>${translate(`countries.${trip.country}`)}</span>
+                `;
+                pill.addEventListener('click', () => showCountry(trip.country));
+                container.appendChild(pill);
+            });
         }
-        
-        // Render main content
-        function renderContent() {
-            const container = document.getElementById('mainContent');
+
+        function createDayCard(segment) {
+            const cityName = translateCity(segment.city);
+            const dateFormatted = formatDate(segment.date);
             
-            const html = itinerary.trips.map(trip => {
-                const isActive = trip.country === currentCountry;
-                const totalDays = trip.segments.length;
-                
-                const segmentsHtml = trip.segments.map((segment, index) => {
-                    const date = formatDate(segment.date);
-                    
-                    return `
-                        <div class="day-card">
-                            <div class="day-card-header">
-                                <div>
-                                    <div class="day-date">${date.month} ${date.day}, ${date.weekday}</div>
-                                    <div class="day-location">
-                                        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                            <circle cx="12" cy="10" r="3"/>
-                                        </svg>
-                                        ${segment.city}
-                                    </div>
-                                </div>
-                                ${segment.weather ? `
-                                    <div class="weather-badge">
-                                        ${getWeatherIcon(segment.weather.condition)}
-                                        <span class="weather-temp">${segment.weather.minC}°-${segment.weather.maxC}°</span>
-                                    </div>
-                                ` : ''}
-                            </div>
-                            <div class="day-card-body">
-                                ${segment.activities && segment.activities.length > 0 ? `
-                                    <div class="activities-container">
-                                        <div class="section-label">${t('activities')}</div>
-                                        <div class="activity-pills">
-                                            ${segment.activities.map(activity => `
-                                                <span class="activity-pill">
-                                                    <svg class="activity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                        <polyline points="9 11 12 14 22 4"/>
-                                                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-                                                    </svg>
-                                                    ${activity}
-                                                </span>
-                                            `).join('')}
-                                        </div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${segment.transport ? `
-                                    <div class="detail-row">
-                                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M5 12l14 0"/>
-                                            <path d="M13 18l6 -6"/>
-                                            <path d="M13 6l6 6"/>
-                                        </svg>
-                                        <div class="detail-content">
-                                            <div class="detail-label">${t('transport')}</div>
-                                            <div class="detail-text">${segment.transport}</div>
-                                        </div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${segment.lodging ? `
-                                    <div class="detail-row">
-                                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                            <polyline points="9 22 9 12 15 12 15 22"/>
-                                        </svg>
-                                        <div class="detail-content">
-                                            <div class="detail-label">${t('lodging')}</div>
-                                            <div class="detail-text">
-                                                ${mapLinks.accommodations[segment.lodging] ? 
-                                                    `<a href="${mapLinks.accommodations[segment.lodging]}" target="_blank" rel="noopener noreferrer">${segment.lodging}</a>` : 
-                                                    segment.lodging}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${segment.notes && !segment.lodging ? `
-                                    <div class="detail-row">
-                                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                            <polyline points="14 2 14 8 20 8"/>
-                                            <line x1="16" y1="13" x2="8" y2="13"/>
-                                            <line x1="16" y1="17" x2="8" y2="17"/>
-                                        </svg>
-                                        <div class="detail-content">
-                                            <div class="detail-label">${t('notes')}</div>
-                                            <div class="detail-text">${segment.notes}</div>
-                                        </div>
-                                    </div>
-                                ` : ''}
-                            </div>
+            return `
+                <div class="day-card">
+                    <div class="day-card-header">
+                        <div class="day-date">${dateFormatted}</div>
+                        <div class="day-location">
+                            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            ${cityName}
                         </div>
-                    `;
-                }).join('');
-                
-                return `
-                    <div class="country-section ${isActive ? 'active' : ''}" data-country="${trip.country}">
-                        <div class="country-header">
-                            <div class="country-flag">${trip.emoji}</div>
-                            <div class="country-info">
-                                <h2>${t('countries.' + trip.country)}</h2>
-                                <div class="country-meta">
-                                    ${totalDays} ${t('statDays').toLowerCase()} • 
-                                    ${formatDate(trip.dateRange.start).month} ${formatDate(trip.dateRange.start).day} - 
-                                    ${formatDate(trip.dateRange.end).month} ${formatDate(trip.dateRange.end).day}
+                    </div>
+                    <div class="day-card-body">
+                        ${segment.activities.length > 0 ? `
+                            <div class="activities-container">
+                                <div class="section-label">${translate('activities')}</div>
+                                <div class="activity-pills">
+                                    ${segment.activities.map(activity => `
+                                        <span class="activity-pill">
+                                            <svg class="activity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                            </svg>
+                                            ${activity}
+                                        </span>
+                                    `).join('')}
                                 </div>
                             </div>
-                        </div>
-                        <div class="days-grid">
-                            ${segmentsHtml}
+                        ` : ''}
+                        
+                        ${segment.transport ? `
+                            <div class="detail-row">
+                                <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 3h5v5l-5-5z"></path>
+                                    <path d="M8 3H3v5l5-5z"></path>
+                                    <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"></path>
+                                    <path d="M21 3l-7.828 7.828A4 4 0 0 0 12 13.657V22"></path>
+                                </svg>
+                                <div class="detail-content">
+                                    <div class="detail-label">${translate('transport')}</div>
+                                    <div class="detail-text">${segment.transport}</div>
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${segment.lodging ? `
+                            <div class="detail-row">
+                                <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                                <div class="detail-content">
+                                    <div class="detail-label">${translate('lodging')}</div>
+                                    <div class="detail-text">${segment.lodging}</div>
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${segment.notes ? `
+                            <div class="detail-row">
+                                <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10,9 9,9 8,9"></polyline>
+                                </svg>
+                                <div class="detail-content">
+                                    <div class="detail-label">${translate('notes')}</div>
+                                    <div class="detail-text">${segment.notes}</div>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function showCountry(countryName) {
+            // Update active state
+            activeCountry = countryName;
+            
+            // Update country pills
+            document.querySelectorAll('.country-pill').forEach(pill => {
+                pill.classList.remove('active');
+                pill.setAttribute('aria-selected', 'false');
+            });
+            
+            const activePill = Array.from(document.querySelectorAll('.country-pill'))
+                .find(pill => pill.textContent.trim().includes(translate(`countries.${countryName}`)));
+            if (activePill) {
+                activePill.classList.add('active');
+                activePill.setAttribute('aria-selected', 'true');
+            }
+            
+            // Hide all sections
+            document.querySelectorAll('.country-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show active section
+            const activeSection = document.getElementById(`country-${countryName}`);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+        }
+
+        function generateContent() {
+            const container = document.getElementById('mainContent');
+            container.innerHTML = '';
+            
+            itinerary.trips.forEach(trip => {
+                const countrySection = document.createElement('div');
+                countrySection.className = 'country-section';
+                countrySection.id = `country-${trip.country}`;
+                
+                const countryHeader = `
+                    <div class="country-header">
+                        <div class="country-flag">${trip.emoji}</div>
+                        <div class="country-info">
+                            <h2>${translate(`countries.${trip.country}`)}</h2>
+                            <div class="country-meta">${trip.segments.length} days • ${formatDate(trip.segments[0].date)} - ${formatDate(trip.segments[trip.segments.length - 1].date)}</div>
                         </div>
                     </div>
                 `;
-            }).join('');
+                
+                const daysGrid = `
+                    <div class="days-grid">
+                        ${trip.segments.map(segment => createDayCard(segment)).join('')}
+                    </div>
+                `;
+                
+                countrySection.innerHTML = countryHeader + daysGrid;
+                container.appendChild(countrySection);
+            });
             
-            container.innerHTML = html;
+            // Show first country by default
+            showCountry(itinerary.trips[0].country);
         }
-        
-        // Update UI text
-        function updateUIText() {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (key) {
-                    el.textContent = t(key);
+
+        function updateLanguageToggle() {
+            const slider = document.getElementById('langSlider');
+            const buttons = document.querySelectorAll('.lang-toggle button');
+            
+            buttons.forEach((btn, index) => {
+                const isActive = btn.dataset.lang === currentLanguage;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive);
+                
+                if (isActive) {
+                    slider.style.width = `${btn.offsetWidth}px`;
+                    slider.style.transform = `translateX(${btn.offsetLeft - 3}px)`;
                 }
+            });
+        }
+
+        function updateAllText() {
+            // Update all elements with data-i18n attributes
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = translate(key);
             });
             
             // Update date range
-            const startDate = new Date('2025-09-20');
-            const endDate = new Date('2025-10-17');
-            const options = { month: 'long', day: 'numeric', year: 'numeric' };
             document.getElementById('dateRange').textContent = 
-                `${startDate.toLocaleDateString(currentLang === 'ko' ? 'ko-KR' : 'en-US', options)} - ${endDate.toLocaleDateString(currentLang === 'ko' ? 'ko-KR' : 'en-US', options)}`;
+                `${formatDate('2025-09-20')} - ${formatDate('2025-10-17')}`;
             
-            renderCountryPills();
-            renderContent();
+            // Regenerate content with new language
+            createCountryPills();
+            generateContent();
         }
-        
-        // Show toast
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            updateLanguageToggle();
+            updateAllText();
+        }
+
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
+            
             toastMessage.textContent = message;
             toast.classList.add('show');
+            
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
-        
-        // Handle country pill clicks
-        function handleCountryClick(e) {
-            const pill = e.target.closest('.country-pill');
-            if (!pill) return;
-            
-            currentCountry = pill.dataset.country;
-            renderCountryPills();
-            renderContent();
-            
-            // Update URL
-            window.location.hash = currentCountry.toLowerCase();
-            
-            // Smooth scroll to content
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector('.main-content').scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
+
+        function shareItinerary() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '2025 Family Adventure',
+                    text: 'Check out our amazing 28-day journey through India, Vietnam, Taiwan, and Singapore!',
+                    url: window.location.href
                 });
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => showToast(translate('linkCopied')))
+                    .catch(() => showToast('Share failed'));
             }
         }
-        
-        // Handle language toggle
-        function handleLangToggle(e) {
-            const btn = e.target.closest('button');
-            if (!btn || !btn.dataset.lang) return;
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language toggle
+            updateLanguageToggle();
             
-            const lang = btn.dataset.lang;
-            if (lang === currentLang) return;
-            
-            currentLang = lang;
-            
-            // Update toggle buttons
-            document.querySelectorAll('.lang-toggle button').forEach(b => {
-                b.classList.toggle('active', b.dataset.lang === lang);
-                b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
-            });
-            
-            // Update slider position
-            const slider = document.getElementById('langSlider');
-            if (lang === 'ko') {
-                slider.style.left = 'calc(50% - 3px)';
-                slider.style.width = 'calc(50% + 3px)';
-            } else {
-                slider.style.left = '3px';
-                slider.style.width = 'calc(50% - 3px)';
-            }
-            
-            // Update URL
-            const url = new URL(window.location);
-            url.searchParams.set('lang', lang);
-            window.history.replaceState({}, '', url);
-            
-            // Save preference
-            localStorage.setItem('preferredLang', lang);
-            
-            // Update UI
-            updateUIText();
-        }
-        
-        // Handle share
-        async function handleShare() {
-            try {
-                if (navigator.share) {
-                    await navigator.share({
-                        title: '2025 Family Adventure',
-                        text: 'Check out our amazing family trip itinerary!',
-                        url: window.location.href
-                    });
-                } else {
-                    await navigator.clipboard.writeText(window.location.href);
-                    showToast(t('linkCopied'));
-                }
-            } catch (err) {
-                // Fallback
-                const input = document.createElement('input');
-                input.value = window.location.href;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                document.body.removeChild(input);
-                showToast(t('linkCopied'));
-            }
-        }
-        
-        // Handle deep links
-        function handleDeepLink() {
-            const hash = window.location.hash.slice(1);
-            if (!hash) return;
-            
-            const country = hash.charAt(0).toUpperCase() + hash.slice(1);
-            if (itinerary.trips.find(t => t.country === country)) {
-                currentCountry = country;
-                renderCountryPills();
-                renderContent();
-                updateDateRange(); // Update date range when deep linking
-            }
-        }
-        
-        // Update all weather data
-        async function updateAllWeather() {
-            const btn = document.getElementById('weatherUpdateBtn');
-            const btnText = btn.querySelector('span');
-            const originalText = btnText.textContent;
-            
-            // Show updating state
-            btnText.textContent = t('updatingWeather');
-            btn.disabled = true;
-            
-            try {
-                // Update weather for all segments
-                for (let trip of itinerary.trips) {
-                    for (let segment of trip.segments) {
-                        const newWeather = await fetchWeatherData(segment.city, segment.date);
-                        if (newWeather) {
-                            segment.weather = newWeather;
-                        }
-                    }
-                }
-                
-                // Re-render content with updated weather
-                renderContent();
-                
-                // Show success message
-                showToast(t('weatherUpdated'));
-                
-                // Add live indicator if using real API
-                const existingIndicator = btn.querySelector('.weather-live-indicator');
-                if (!existingIndicator) {
-                    const indicator = document.createElement('div');
-                    indicator.className = 'weather-live-indicator';
-                    btn.appendChild(indicator);
-                }
-                
-            } catch (error) {
-                console.error('Weather update failed:', error);
-                showToast(t('weatherUpdateFailed'));
-            } finally {
-                // Reset button state
-                setTimeout(() => {
-                    btnText.textContent = t('updateWeather');
-                    btn.disabled = false;
-                }, 1000);
-            }
-        }
-        
-        // Initialize language slider
-        function initLangSlider() {
-            const slider = document.getElementById('langSlider');
-            if (currentLang === 'ko') {
-                slider.style.left = 'calc(50% - 3px)';
-                slider.style.width = 'calc(50% + 3px)';
-            } else {
-                slider.style.left = '3px';
-                slider.style.width = 'calc(50% - 3px)';
-            }
-        }
-        
-        // Add loading animation
-        function addLoadingAnimation() {
-            const cards = document.querySelectorAll('.day-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.05}s`;
-            });
-        }
-        
-        // Initialize
-        function init() {
-            // Check for language preference
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlLang = urlParams.get('lang');
-            const savedLang = localStorage.getItem('preferredLang');
-            
-            if (urlLang && (urlLang === 'en' || urlLang === 'ko')) {
-                currentLang = urlLang;
-            } else if (savedLang) {
-                currentLang = savedLang;
-            }
-            
-            // Set initial language toggle state
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === currentLang);
-                btn.setAttribute('aria-pressed', btn.dataset.lang === currentLang ? 'true' : 'false');
-            });
-            
-            // Initialize language slider
-            initLangSlider();
-            
-            // Initial render
-            updateUIText();
-            
-            // Add loading animations
-            setTimeout(addLoadingAnimation, 100);
-            
-            // Event listeners
-            document.getElementById('countryPills').addEventListener('click', handleCountryClick);
-            document.querySelector('.lang-toggle').addEventListener('click', handleLangToggle);
-            document.querySelector('.share-btn').addEventListener('click', handleShare);
-            
-            // Handle deep links
-            handleDeepLink();
-            window.addEventListener('hashchange', handleDeepLink);
-            
-            // Add keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                    const pills = Array.from(document.querySelectorAll('.country-pill'));
-                    const currentIndex = pills.findIndex(p => p.classList.contains('active'));
-                    let newIndex = currentIndex;
-                    
-                    if (e.key === 'ArrowLeft' && currentIndex > 0) {
-                        newIndex = currentIndex - 1;
-                    } else if (e.key === 'ArrowRight' && currentIndex < pills.length - 1) {
-                        newIndex = currentIndex + 1;
-                    }
-                    
-                    if (newIndex !== currentIndex) {
-                        pills[newIndex].click();
-                    }
-                }
-            });
-            
-            // Add touch swipe support for mobile
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            document.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-            
-            document.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const diff = touchStartX - touchEndX;
-                
-                if (Math.abs(diff) > swipeThreshold) {
-                    const pills = Array.from(document.querySelectorAll('.country-pill'));
-                    const currentIndex = pills.findIndex(p => p.classList.contains('active'));
-                    let newIndex = currentIndex;
-                    
-                    if (diff > 0 && currentIndex < pills.length - 1) {
-                        // Swiped left - go to next country
-                        newIndex = currentIndex + 1;
-                    } else if (diff < 0 && currentIndex > 0) {
-                        // Swiped right - go to previous country
-                        newIndex = currentIndex - 1;
-                    }
-                    
-                    if (newIndex !== currentIndex) {
-                        pills[newIndex].click();
-                    }
-                }
-            }
-            
-            // Add parallax effect on scroll
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                window.addEventListener('scroll', () => {
-                    const scrolled = window.pageYOffset;
-                    const hero = document.querySelector('.hero');
-                    if (hero) {
-                        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    }
+            // Language toggle event listeners
+            document.querySelectorAll('.lang-toggle button').forEach(button => {
+                button.addEventListener('click', () => {
+                    switchLanguage(button.dataset.lang);
                 });
-            }
+            });
             
-            // Add intersection observer for animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+            // Share button event listener
+            document.querySelector('.share-btn').addEventListener('click', shareItinerary);
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
+            // Generate initial content
+            createCountryPills();
+            generateContent();
             
-            // Observe all day cards
-            setTimeout(() => {
-                document.querySelectorAll('.day-card').forEach(card => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    observer.observe(card);
-                });
-            }, 200);
-        }
-        
-        // Start app when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
+            // Update initial text
+            updateAllText();
+        });
+
+        // Handle window resize for language toggle
+        window.addEventListener('resize', () => {
+            setTimeout(updateLanguageToggle, 100);
+        });
     </script>
 </body>
 </html>

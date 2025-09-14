@@ -1522,6 +1522,53 @@
             }
         }
         
+        // Update all weather data
+        async function updateAllWeather() {
+            const btn = document.getElementById('weatherUpdateBtn');
+            const btnText = btn.querySelector('span');
+            const originalText = btnText.textContent;
+            
+            // Show updating state
+            btnText.textContent = t('updatingWeather');
+            btn.disabled = true;
+            
+            try {
+                // Update weather for all segments
+                for (let trip of itinerary.trips) {
+                    for (let segment of trip.segments) {
+                        const newWeather = await fetchWeatherData(segment.city, segment.date);
+                        if (newWeather) {
+                            segment.weather = newWeather;
+                        }
+                    }
+                }
+                
+                // Re-render content with updated weather
+                renderContent();
+                
+                // Show success message
+                showToast(t('weatherUpdated'));
+                
+                // Add live indicator if using real API
+                const existingIndicator = btn.querySelector('.weather-live-indicator');
+                if (!existingIndicator) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'weather-live-indicator';
+                    btn.appendChild(indicator);
+                }
+                
+            } catch (error) {
+                console.error('Weather update failed:', error);
+                showToast(t('weatherUpdateFailed'));
+            } finally {
+                // Reset button state
+                setTimeout(() => {
+                    btnText.textContent = t('updateWeather');
+                    btn.disabled = false;
+                }, 1000);
+            }
+        }
+        
         // Initialize language slider
         function initLangSlider() {
             const slider = document.getElementById('langSlider');

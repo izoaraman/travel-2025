@@ -1,96 +1,887 @@
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Family Adventure</title>
+    <meta name="description" content="Sep 20 - Oct 17, 2025 • India, Vietnam, Taiwan, Singapore">
+    <meta property="og:title" content="2025 Family Adventure">
+    <meta property="og:description" content="Sep 20 - Oct 17, 2025 • India, Vietnam, Taiwan, Singapore">
+    <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMUNDRkM5O3N0b3Atb3BhY2l0eToxIiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzEzMTgzODtzdG9wLW9wYWNpdHk6MSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIGZpbGw9InVybCgjZ3JhZCkiLz48dGV4dCB4PSI2MDAiIHk9IjMwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjcwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MjAyNSBGYW1pbHkgQWR2ZW50dXJlPC90ZXh0Pjx0ZXh0IHg9IjYwMCIgeT0iMzgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzIiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW5kaWEg4oCiIFZpZXRuYW0g4oCiIFRhaXdhbiDigKIgU2luZ2Fwb3JlPC90ZXh0Pjwvc3ZnPg==">
+    
+    <style>
+        <!--
+        Generated: 2025-01-01T00:00:00Z
+        Sources: 2025 Family Trip Simple; 2025 India Vietnam Taiwan Singapore
+        Parsed segments: 28
+        Countries detected: India, Vietnam, Taiwan, Singapore
+        Notes: Modern UI with animations and visual enhancements
+        -->
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1CCFC9;
+            --primary-dark: #16a8a3;
+            --dark: #0a0e27;
+            --dark-blue: #131838;
+            --white: #ffffff;
+            --off-white: #f8fafb;
+            --gray-light: #e8ecef;
+            --gray: #6c757d;
+            --gray-dark: #495057;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-primary: linear-gradient(135deg, #1CCFC9 0%, #16a8a3 100%);
+            --gradient-dark: linear-gradient(135deg, #0a0e27 0%, #131838 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+            --shadow-xl: 0 12px 48px rgba(0,0,0,0.2);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        body {
+            font-family: -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(180deg, #f8fafb 0%, #e8ecef 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: 60px 20px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(28, 207, 201, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, transparent 0%, var(--off-white) 100%);
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            opacity: 0.95;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+        
+        .hero-dates {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .date-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+        }
+        
+        /* Controls Bar */
+        .controls-bar {
+            background: var(--white);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .controls-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        /* Country Pills */
+        .country-pills {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px;
+            background: var(--gray-light);
+            border-radius: 100px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .country-pills::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .country-pill {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            white-space: nowrap;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .country-pill:hover {
+            transform: translateY(-2px);
+        }
+        
+        .country-pill.active {
+            background: var(--gradient-primary);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        
+        .country-emoji {
+            font-size: 18px;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .lang-toggle {
+            display: flex;
+            background: var(--gray-light);
+            border-radius: 100px;
+            padding: 3px;
+            position: relative;
+        }
+        
+        .lang-toggle button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .lang-toggle button.active {
+            color: var(--white);
+        }
+        
+        .lang-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            height: calc(100% - 6px);
+            background: var(--gradient-primary);
+            border-radius: 100px;
+            transition: var(--transition);
+            z-index: 1;
+        }
+        
+        .share-btn {
+            padding: 10px 20px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .share-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .country-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .country-section.active {
+            display: block;
+        }
+        
+        .country-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .country-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        
+        .country-flag {
+            font-size: 48px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .country-info h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 4px;
+        }
+        
+        .country-meta {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Day Cards Grid */
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .day-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            animation: slideInLeft 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .day-card-header {
+            background: var(--gradient-primary);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .day-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .day-date {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            position: relative;
+        }
+        
+        .day-location {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 24px;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        
+        .location-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            opacity: 0.9;
+        }
+        
+        .day-card-body {
+            padding: 20px;
+        }
+        
+        /* Weather Badge */
+        .weather-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark-blue);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .weather-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .weather-temp {
+            font-weight: 700;
+        }
+        
+        /* Activity Pills */
+        .activities-container {
+            margin-bottom: 16px;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+        
+        .activity-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .activity-pill {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .activity-icon {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+        
+        /* Detail Rows */
+        .detail-row {
+            padding: 12px 0;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .detail-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .detail-content {
+            flex: 1;
+        }
+        
+        .detail-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+        
+        .detail-text {
+            font-size: 14px;
+            color: var(--dark-blue);
+            line-height: 1.5;
+        }
+        
+        /* Statistics Bar */
+        .stats-bar {
+            background: var(--white);
+            padding: 32px 20px;
+            margin: 40px 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            position: relative;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: 16px 24px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .toast-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(28, 207, 201, 0.05) 0%, transparent 70%);
+            animation: float 30s ease-in-out infinite;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 20px auto;
+            border-radius: 100px;
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-light) 25%, #f0f0f0 50%, var(--gray-light) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px 30px;
+            }
+            
+            .controls-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .country-pills {
+                width: 100%;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .days-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            
+            .country-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .controls-bar,
+            .action-buttons,
+            footer {
+                display: none;
+            }
+            
+            .day-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid var(--gray-light);
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div>
-                    <h1 data-i18n="appTitle">2025 Family Trip Itinerary</h1>
-                    <div class="date-range" id="dateRange">Sep 20 - Oct 17, 2025</div>
-                </div>
-                <div class="controls">
-                    <div class="lang-toggle" role="group" aria-label="Language selection">
-                        <button class="active" data-lang="en" aria-pressed="true">EN</button>
-                        <button data-lang="ko" aria-pressed="false">KR</button>
-                    </div>
-                    <button class="share-btn" data-i18n="share" aria-label="Share itinerary">Share</button>
-                </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="heroTitle">2025 Family Adventure</h1>
+            <p class="hero-subtitle" data-i18n="heroSubtitle">An Epic Journey Across Four Amazing Countries</p>
+            <div class="hero-dates">
+                <svg class="date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span id="dateRange">September 20 - October 17, 2025</span>
             </div>
         </div>
     </header>
     
-    <nav class="country-tabs" role="navigation" aria-label="Country navigation">
-        <div class="tabs-container" id="tabsContainer"></div>
+    <!-- Controls Bar -->
+    <nav class="controls-bar">
+        <div class="controls-container">
+            <div class="country-pills" id="countryPills" role="tablist"></div>
+            <div class="action-buttons">
+                <div class="lang-toggle" role="group" aria-label="Language selection">
+                    <div class="lang-toggle-slider" id="langSlider"></div>
+                    <button class="active" data-lang="en" aria-pressed="true">EN</button>
+                    <button data-lang="ko" aria-pressed="false">KR</button>
+                </div>
+                <button class="share-btn" data-i18n="share" aria-label="Share itinerary">
+                    <svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                        <polyline points="16 6 12 2 8 6"></polyline>
+                        <line x1="12" y1="2" x2="12" y2="15"></line>
+                    </svg>
+                    <span data-i18n="share">Share</span>
+                </button>
+            </div>
+        </div>
     </nav>
     
-    <main class="content">
-        <div class="container" id="mainContent"></div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <p>Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore</p>
-                <p class="disclaimer" data-i18n="disclaimer">Weather is an estimate based on monthly norms.</p>
+    <!-- Statistics Bar -->
+    <div class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">28</div>
+                <div class="stat-label" data-i18n="statDays">Days</div>
             </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label" data-i18n="statCountries">Countries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label" data-i18n="statCities">Cities</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">∞</div>
+                <div class="stat-label" data-i18n="statMemories">Memories</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent"></main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title" data-i18n="footerTitle">Travel Information</div>
+            <div class="footer-divider"></div>
+            <p class="footer-text" data-i18n="footerSources">
+                Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore
+            </p>
+            <p class="footer-text" data-i18n="disclaimer">
+                Weather forecasts are estimates based on historical monthly averages.
+            </p>
         </div>
     </footer>
     
-    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span id="toastMessage"></span>
+    </div>
     
     <script>
         // i18n Dictionary
         const i18n = {
             en: {
-                appTitle: "2025 Family Trip Itinerary",
-                byCountry: "By Country",
-                date: "Date",
-                city: "City",
+                heroTitle: "2025 Family Adventure",
+                heroSubtitle: "An Epic Journey Across Four Amazing Countries",
+                share: "Share",
+                statDays: "Days",
+                statCountries: "Countries",
+                statCities: "Cities",
+                statMemories: "Memories",
                 activities: "Activities",
                 transport: "Transport",
-                lodging: "Lodging",
+                lodging: "Accommodation",
                 notes: "Notes",
-                weather: "Estimated Weather",
-                share: "Share",
-                linkCopied: "Link copied",
-                disclaimer: "Weather is an estimate based on monthly norms.",
-                countries: { India: "India", Vietnam: "Vietnam", Taiwan: "Taiwan", Singapore: "Singapore" }
+                weather: "Weather",
+                linkCopied: "Link copied to clipboard!",
+                footerTitle: "Travel Information",
+                footerSources: "Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore",
+                disclaimer: "Weather forecasts are estimates based on historical monthly averages.",
+                countries: { 
+                    India: "India", 
+                    Vietnam: "Vietnam", 
+                    Taiwan: "Taiwan", 
+                    Singapore: "Singapore" 
+                },
+                months: {
+                    Sep: "September",
+                    Oct: "October"
+                }
             },
             ko: {
-                appTitle: "2025 가족 여행 일정",
-                byCountry: "국가별",
-                date: "날짜",
-                city: "도시",
+                heroTitle: "2025 가족 모험",
+                heroSubtitle: "네 개의 놀라운 나라를 가로지르는 대서사시",
+                share: "공유",
+                statDays: "일",
+                statCountries: "국가",
+                statCities: "도시",
+                statMemories: "추억",
                 activities: "활동",
                 transport: "이동수단",
                 lodging: "숙소",
                 notes: "메모",
-                weather: "예상 날씨",
-                share: "공유",
-                linkCopied: "링크가 복사되었습니다",
-                disclaimer: "날씨는 월별 평균을 기반으로 한 추정치입니다.",
-                countries: { India: "인도", Vietnam: "베트남", Taiwan: "대만", Singapore: "싱가포르" }
+                weather: "날씨",
+                linkCopied: "링크가 클립보드에 복사되었습니다!",
+                footerTitle: "여행 정보",
+                footerSources: "출처: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore",
+                disclaimer: "날씨 예보는 과거 월별 평균을 기반으로 한 추정치입니다.",
+                countries: { 
+                    India: "인도", 
+                    Vietnam: "베트남", 
+                    Taiwan: "대만", 
+                    Singapore: "싱가포르" 
+                },
+                months: {
+                    Sep: "9월",
+                    Oct: "10월"
+                }
             }
         };
         
-        // Weather lookup table
+        // Weather lookup table - Updated with accurate data
         const weatherData = {
-            "Delhi": { 9: { min: 24, max: 35, condition: "Hot" } },
-            "Agra": { 9: { min: 27, max: 37, condition: "Hot" } },
-            "Haridwar": { 9: { min: 23, max: 36, condition: "Hot" } },
-            "Rishikesh": { 9: { min: 23, max: 36, condition: "Hot" } },
-            "Hanoi": { 9: { min: 25, max: 31, condition: "Humid" }, 10: { min: 23, max: 29, condition: "Mild" } },
-            "Halong Bay": { 9: { min: 24, max: 30, condition: "Humid" }, 10: { min: 23, max: 29, condition: "Mild" } },
-            "Danang": { 10: { min: 23, max: 29, condition: "Mild" } },
-            "Hoi An": { 10: { min: 23, max: 29, condition: "Mild" } },
+            // India - September
+            "Delhi": { 9: { min: 24, max: 34, condition: "Hot & Humid" } },
+            "Agra": { 9: { min: 24, max: 34, condition: "Hot" } },
+            "Haridwar": { 9: { min: 22, max: 32, condition: "Warm" } },
+            "Rishikesh": { 9: { min: 22, max: 32, condition: "Warm" } },
+            // Vietnam
+            "Hanoi": { 9: { min: 24, max: 31, condition: "Humid" }, 10: { min: 20, max: 27, condition: "Pleasant" } },
+            "Halong Bay": { 9: { min: 24, max: 30, condition: "Humid" }, 10: { min: 22, max: 28, condition: "Pleasant" } },
+            "Danang": { 10: { min: 24, max: 30, condition: "Rainy" } },
+            "Hoi An": { 10: { min: 24, max: 27, condition: "Rainy" } },
             "Ho Chi Minh": { 10: { min: 24, max: 32, condition: "Humid" } },
-            "Jiufen": { 10: { min: 24, max: 28, condition: "Mild" } },
-            "Taipei": { 10: { min: 24, max: 28, condition: "Mild" } },
-            "Alishan": { 10: { min: 23, max: 31, condition: "Cool" } },
-            "Chiayi": { 10: { min: 23, max: 32, condition: "Warm" } },
-            "Taoyuan": { 10: { min: 24, max: 28, condition: "Mild" } },
-            "Singapore": { 10: { min: 27, max: 30, condition: "Humid" } }
+            // Taiwan
+            "Jiufen": { 10: { min: 22, max: 27, condition: "Pleasant" } },
+            "Taipei": { 10: { min: 22, max: 27, condition: "Pleasant" } },
+            "Alishan": { 10: { min: 14, max: 21, condition: "Cool" } },
+            "Chiayi": { 10: { min: 23, max: 31, condition: "Warm" } },
+            "Taoyuan": { 10: { min: 22, max: 27, condition: "Pleasant" } },
+            // Singapore
+            "Singapore": { 10: { min: 26, max: 31, condition: "Hot & Humid" } }
         };
         
         // Parse itinerary data
@@ -98,6 +889,7 @@
             trips: [
                 {
                     country: "India",
+                    emoji: "🇮🇳",
                     segments: [
                         {
                             date: "2025-09-20",
@@ -106,7 +898,7 @@
                             transport: "SYD-SIN Scoot TR3, SIN-DEL Air India AI2383",
                             lodging: "",
                             notes: "Visa Application ID: I004VCD54E25, I004VCD55025",
-                            weather: { minC: 24, maxC: 35, condition: "Hot", confidence: 0.7 }
+                            weather: { minC: 24, maxC: 34, condition: "Hot & Humid", confidence: 0.7 }
                         },
                         {
                             date: "2025-09-21",
@@ -115,7 +907,7 @@
                             transport: "New Delhi to Agra (12002 Rani Kamlapati Shatabdi Express)",
                             lodging: "Aman Homestay",
                             notes: "",
-                            weather: { minC: 27, maxC: 37, condition: "Hot", confidence: 0.7 }
+                            weather: { minC: 24, maxC: 34, condition: "Hot", confidence: 0.7 }
                         },
                         {
                             date: "2025-09-22",
@@ -124,7 +916,7 @@
                             transport: "Agra Cantt to Hazrat Nizamuddin, New Delhi to Haridwar",
                             lodging: "Hotel Le Roi Haridwar",
                             notes: "",
-                            weather: { minC: 23, maxC: 36, condition: "Hot", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 32, condition: "Warm", confidence: 0.7 }
                         },
                         {
                             date: "2025-09-23",
@@ -133,7 +925,7 @@
                             transport: "Haridwar to Rishikesh",
                             lodging: "Hilltop Swiss Cottage",
                             notes: "",
-                            weather: { minC: 23, maxC: 36, condition: "Hot", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 32, condition: "Warm", confidence: 0.7 }
                         },
                         {
                             date: "2025-09-24",
@@ -142,7 +934,7 @@
                             transport: "",
                             lodging: "Hilltop Swiss Cottage",
                             notes: "",
-                            weather: { minC: 24, maxC: 37, condition: "Hot", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 32, condition: "Warm", confidence: 0.7 }
                         },
                         {
                             date: "2025-09-25",
@@ -151,13 +943,14 @@
                             transport: "Rishikesh to Delhi Hazrat Nizamuddin (18478 Kalinga Utkal Express)",
                             lodging: "",
                             notes: "Family Flight Korean Air KE0453 to Hanoi at 18:45",
-                            weather: { minC: 25, maxC: 34, condition: "Hot", confidence: 0.7 }
+                            weather: { minC: 24, maxC: 34, condition: "Hot & Humid", confidence: 0.7 }
                         }
                     ],
                     dateRange: { start: "2025-09-20", end: "2025-09-25" }
                 },
                 {
                     country: "Vietnam",
+                    emoji: "🇻🇳",
                     segments: [
                         {
                             date: "2025-09-26",
@@ -281,6 +1074,7 @@
                 },
                 {
                     country: "Taiwan",
+                    emoji: "🇹🇼",
                     segments: [
                         {
                             date: "2025-10-09",
@@ -289,7 +1083,7 @@
                             transport: "",
                             lodging: "山午 雲在屾房",
                             notes: "",
-                            weather: { minC: 24, maxC: 28, condition: "Mild", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
                         },
                         {
                             date: "2025-10-10",
@@ -298,7 +1092,7 @@
                             transport: "",
                             lodging: "OwlStay FlipFlop Hostel Garden",
                             notes: "",
-                            weather: { minC: 24, maxC: 28, condition: "Mild", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
                         },
                         {
                             date: "2025-10-11",
@@ -307,7 +1101,7 @@
                             transport: "",
                             lodging: "OwlStay FlipFlop Hostel Garden",
                             notes: "",
-                            weather: { minC: 23, maxC: 27, condition: "Mild", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
                         },
                         {
                             date: "2025-10-12",
@@ -316,7 +1110,7 @@
                             transport: "Taipei to Chiayi HSR, Chiayi to Alishan",
                             lodging: "高山青大饭店",
                             notes: "",
-                            weather: { minC: 23, maxC: 31, condition: "Cool", confidence: 0.7 }
+                            weather: { minC: 14, maxC: 21, condition: "Cool", confidence: 0.7 }
                         },
                         {
                             date: "2025-10-13",
@@ -325,7 +1119,7 @@
                             transport: "",
                             lodging: "Light Hostel",
                             notes: "",
-                            weather: { minC: 23, maxC: 32, condition: "Warm", confidence: 0.7 }
+                            weather: { minC: 23, maxC: 31, condition: "Warm", confidence: 0.7 }
                         },
                         {
                             date: "2025-10-14",
@@ -334,13 +1128,14 @@
                             transport: "Chiayi to Taoyuan HSR",
                             lodging: "",
                             notes: "",
-                            weather: { minC: 24, maxC: 28, condition: "Mild", confidence: 0.7 }
+                            weather: { minC: 22, maxC: 27, condition: "Pleasant", confidence: 0.7 }
                         }
                     ],
                     dateRange: { start: "2025-10-09", end: "2025-10-14" }
                 },
                 {
                     country: "Singapore",
+                    emoji: "🇸🇬",
                     segments: [
                         {
                             date: "2025-10-15",
@@ -349,7 +1144,7 @@
                             transport: "TPE-SIN Scoot TR897",
                             lodging: "Cube Social Boutique Capsule Hotel",
                             notes: "",
-                            weather: { minC: 27, maxC: 30, condition: "Humid", confidence: 0.7 }
+                            weather: { minC: 26, maxC: 31, condition: "Hot & Humid", confidence: 0.7 }
                         },
                         {
                             date: "2025-10-16",
@@ -358,7 +1153,7 @@
                             transport: "SIN-SYD Scoot TR2",
                             lodging: "",
                             notes: "",
-                            weather: { minC: 27, maxC: 29, condition: "Humid", confidence: 0.7 }
+                            weather: { minC: 26, maxC: 31, condition: "Hot & Humid", confidence: 0.7 }
                         }
                     ],
                     dateRange: { start: "2025-10-15", end: "2025-10-16" }
@@ -370,8 +1165,9 @@
             }
         };
         
-        // Current language
+        // Current state
         let currentLang = 'en';
+        let currentCountry = 'India';
         
         // Helper function for translations
         function t(key) {
@@ -389,196 +1185,245 @@
             const weekdays = currentLang === 'en' ? 
                 ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] :
                 ['일', '월', '화', '수', '목', '금', '토'];
+            const months = currentLang === 'en' ?
+                ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] :
+                ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
             return {
-                full: dateStr,
-                weekday: weekdays[date.getDay()]
+                day: date.getDate(),
+                month: months[date.getMonth()],
+                weekday: weekdays[date.getDay()],
+                full: dateStr
             };
         }
         
-        // Get weather icon
+        // Get weather icon SVG
         function getWeatherIcon(condition) {
             const icons = {
-                'Hot': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+                'Hot & Humid': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>',
+                'Hot': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>',
+                'Warm': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg>',
                 'Humid': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>',
-                'Mild': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
-                'Cool': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
-                'Warm': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>'
+                'Pleasant': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+                'Rainy': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><line x1="9" y1="21" x2="9" y2="24"/><line x1="15" y1="21" x2="15" y2="24"/></svg>',
+                'Cool': '<svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16.5A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 7.5"/></svg>'
             };
-            return icons[condition] || icons['Mild'];
+            return icons[condition] || icons['Pleasant'];
         }
         
-        // Get confidence dots
-        function getConfidenceDots(confidence) {
-            if (confidence >= 0.7) return '●●●';
-            if (confidence >= 0.5) return '●●○';
-            return '●○○';
-        }
-        
-        // Get country flag
-        function getCountryFlag(country) {
-            const flags = {
-                'India': '🇮🇳',
-                'Vietnam': '🇻🇳',
-                'Taiwan': '🇹🇼',
-                'Singapore': '🇸🇬'
-            };
-            return flags[country] || '';
-        }
-        
-        // Render tabs
-        function renderTabs() {
-            const container = document.getElementById('tabsContainer');
-            const countries = ['India', 'Vietnam', 'Taiwan', 'Singapore'];
+        // Render country pills
+        function renderCountryPills() {
+            const container = document.getElementById('countryPills');
+            const countries = itinerary.trips.map(trip => ({
+                name: trip.country,
+                emoji: trip.emoji
+            }));
             
             container.innerHTML = countries.map(country => `
-                <button class="tab" data-country="${country}" aria-label="View ${country} itinerary">
-                    ${getCountryFlag(country)} ${t('countries.' + country)}
+                <button class="country-pill ${country.name === currentCountry ? 'active' : ''}" 
+                        data-country="${country.name}" 
+                        role="tab" 
+                        aria-selected="${country.name === currentCountry}">
+                    <span class="country-emoji">${country.emoji}</span>
+                    <span>${t('countries.' + country.name)}</span>
                 </button>
             `).join('');
-            
-            // Set first tab as active
-            container.querySelector('.tab').classList.add('active');
         }
         
-        // Render content
+        // Render main content
         function renderContent() {
             const container = document.getElementById('mainContent');
+            
             const html = itinerary.trips.map(trip => {
-                const segments = trip.segments.map(segment => {
+                const isActive = trip.country === currentCountry;
+                const totalDays = trip.segments.length;
+                
+                const segmentsHtml = trip.segments.map((segment, index) => {
                     const date = formatDate(segment.date);
+                    
                     return `
                         <div class="day-card">
-                            <div class="day-header">
+                            <div class="day-card-header">
                                 <div>
-                                    <span class="day-date">${date.full}</span>
-                                    <span class="day-weekday">(${date.weekday})</span>
+                                    <div class="day-date">${date.month} ${date.day}, ${date.weekday}</div>
+                                    <div class="day-location">
+                                        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        ${segment.city}
+                                    </div>
                                 </div>
                                 ${segment.weather ? `
-                                    <div class="weather-chip" title="${t('weather')}">
+                                    <div class="weather-badge">
                                         ${getWeatherIcon(segment.weather.condition)}
-                                        <span>${segment.weather.minC}–${segment.weather.maxC}°C · ${segment.weather.condition}</span>
-                                        <span class="confidence-dots">${getConfidenceDots(segment.weather.confidence)}</span>
+                                        <span class="weather-temp">${segment.weather.minC}°-${segment.weather.maxC}°</span>
                                     </div>
                                 ` : ''}
                             </div>
-                            <div class="city-name">${segment.city}${segment.region ? ', ' + segment.region : ''}</div>
-                            ${segment.activities && segment.activities.length > 0 ? `
-                                <div class="detail-row">
-                                    <div class="detail-label">${t('activities')}</div>
-                                    <ul class="activities-list detail-content">
-                                        ${segment.activities.map(activity => `<li>${activity}</li>`).join('')}
-                                    </ul>
-                                </div>
-                            ` : ''}
-                            ${segment.transport ? `
-                                <div class="detail-row">
-                                    <div class="detail-label">${t('transport')}</div>
-                                    <div class="detail-content">${segment.transport}</div>
-                                </div>
-                            ` : ''}
-                            ${segment.lodging ? `
-                                <div class="detail-row">
-                                    <div class="detail-label">${t('lodging')}</div>
-                                    <div class="detail-content" title="${segment.notes}">${segment.lodging}</div>
-                                </div>
-                            ` : ''}
-                            ${segment.notes && !segment.lodging ? `
-                                <div class="detail-row">
-                                    <div class="detail-label">${t('notes')}</div>
-                                    <div class="detail-content">${segment.notes}</div>
-                                </div>
-                            ` : ''}
+                            <div class="day-card-body">
+                                ${segment.activities && segment.activities.length > 0 ? `
+                                    <div class="activities-container">
+                                        <div class="section-label">${t('activities')}</div>
+                                        <div class="activity-pills">
+                                            ${segment.activities.map(activity => `
+                                                <span class="activity-pill">
+                                                    <svg class="activity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <polyline points="9 11 12 14 22 4"/>
+                                                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                                                    </svg>
+                                                    ${activity}
+                                                </span>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${segment.transport ? `
+                                    <div class="detail-row">
+                                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M5 12l14 0"/>
+                                            <path d="M13 18l6 -6"/>
+                                            <path d="M13 6l6 6"/>
+                                        </svg>
+                                        <div class="detail-content">
+                                            <div class="detail-label">${t('transport')}</div>
+                                            <div class="detail-text">${segment.transport}</div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${segment.lodging ? `
+                                    <div class="detail-row">
+                                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                            <polyline points="9 22 9 12 15 12 15 22"/>
+                                        </svg>
+                                        <div class="detail-content">
+                                            <div class="detail-label">${t('lodging')}</div>
+                                            <div class="detail-text">${segment.lodging}</div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${segment.notes && !segment.lodging ? `
+                                    <div class="detail-row">
+                                        <svg class="detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                            <polyline points="14 2 14 8 20 8"/>
+                                            <line x1="16" y1="13" x2="8" y2="13"/>
+                                            <line x1="16" y1="17" x2="8" y2="17"/>
+                                        </svg>
+                                        <div class="detail-content">
+                                            <div class="detail-label">${t('notes')}</div>
+                                            <div class="detail-text">${segment.notes}</div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            </div>
                         </div>
                     `;
                 }).join('');
                 
                 return `
-                    <div class="country-section" data-country="${trip.country}">
-                        <h2 class="country-header">
-                            <span class="country-flag">${getCountryFlag(trip.country)}</span>
-                            ${t('countries.' + trip.country)}
-                        </h2>
-                        ${segments}
+                    <div class="country-section ${isActive ? 'active' : ''}" data-country="${trip.country}">
+                        <div class="country-header">
+                            <div class="country-flag">${trip.emoji}</div>
+                            <div class="country-info">
+                                <h2>${t('countries.' + trip.country)}</h2>
+                                <div class="country-meta">
+                                    ${totalDays} ${t('statDays').toLowerCase()} • 
+                                    ${formatDate(trip.dateRange.start).month} ${formatDate(trip.dateRange.start).day} - 
+                                    ${formatDate(trip.dateRange.end).month} ${formatDate(trip.dateRange.end).day}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="days-grid">
+                            ${segmentsHtml}
+                        </div>
                     </div>
                 `;
             }).join('');
             
             container.innerHTML = html;
-            
-            // Show first country
-            container.querySelector('.country-section').classList.add('active');
         }
         
         // Update UI text
         function updateUIText() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
-                el.textContent = t(el.dataset.i18n);
+                const key = el.dataset.i18n;
+                if (key) {
+                    el.textContent = t(key);
+                }
             });
             
             // Update date range
             const startDate = new Date('2025-09-20');
             const endDate = new Date('2025-10-17');
-            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
             document.getElementById('dateRange').textContent = 
                 `${startDate.toLocaleDateString(currentLang === 'ko' ? 'ko-KR' : 'en-US', options)} - ${endDate.toLocaleDateString(currentLang === 'ko' ? 'ko-KR' : 'en-US', options)}`;
             
-            // Re-render dynamic content
-            renderTabs();
+            renderCountryPills();
             renderContent();
         }
         
         // Show toast
         function showToast(message) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
         
-        // Handle tab clicks
-        function handleTabClick(e) {
-            if (!e.target.classList.contains('tab')) return;
+        // Handle country pill clicks
+        function handleCountryClick(e) {
+            const pill = e.target.closest('.country-pill');
+            if (!pill) return;
             
-            const country = e.target.dataset.country;
-            
-            // Update tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-                tab.setAttribute('aria-pressed', 'false');
-            });
-            e.target.classList.add('active');
-            e.target.setAttribute('aria-pressed', 'true');
-            
-            // Update content
-            document.querySelectorAll('.country-section').forEach(section => {
-                section.classList.toggle('active', section.dataset.country === country);
-            });
+            currentCountry = pill.dataset.country;
+            renderCountryPills();
+            renderContent();
             
             // Update URL
-            window.location.hash = country.toLowerCase();
+            window.location.hash = currentCountry.toLowerCase();
             
             // Smooth scroll to content
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
+                document.querySelector('.main-content').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         }
         
         // Handle language toggle
         function handleLangToggle(e) {
-            if (!e.target.dataset.lang) return;
+            const btn = e.target.closest('button');
+            if (!btn || !btn.dataset.lang) return;
             
-            const lang = e.target.dataset.lang;
+            const lang = btn.dataset.lang;
             if (lang === currentLang) return;
             
             currentLang = lang;
             
             // Update toggle buttons
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-                btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false');
+            document.querySelectorAll('.lang-toggle button').forEach(b => {
+                b.classList.toggle('active', b.dataset.lang === lang);
+                b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
             });
+            
+            // Update slider position
+            const slider = document.getElementById('langSlider');
+            if (lang === 'ko') {
+                slider.style.left = 'calc(50% - 3px)';
+                slider.style.width = 'calc(50% + 3px)';
+            } else {
+                slider.style.left = '3px';
+                slider.style.width = 'calc(50% - 3px)';
+            }
             
             // Update URL
             const url = new URL(window.location);
@@ -595,8 +1440,16 @@
         // Handle share
         async function handleShare() {
             try {
-                await navigator.clipboard.writeText(window.location.href);
-                showToast(t('linkCopied'));
+                if (navigator.share) {
+                    await navigator.share({
+                        title: '2025 Family Adventure',
+                        text: 'Check out our amazing family trip itinerary!',
+                        url: window.location.href
+                    });
+                } else {
+                    await navigator.clipboard.writeText(window.location.href);
+                    showToast(t('linkCopied'));
+                }
             } catch (err) {
                 // Fallback
                 const input = document.createElement('input');
@@ -614,10 +1467,32 @@
             const hash = window.location.hash.slice(1);
             if (!hash) return;
             
-            const tab = document.querySelector(`.tab[data-country="${hash.charAt(0).toUpperCase() + hash.slice(1)}"]`);
-            if (tab) {
-                tab.click();
+            const country = hash.charAt(0).toUpperCase() + hash.slice(1);
+            if (itinerary.trips.find(t => t.country === country)) {
+                currentCountry = country;
+                renderCountryPills();
+                renderContent();
             }
+        }
+        
+        // Initialize language slider
+        function initLangSlider() {
+            const slider = document.getElementById('langSlider');
+            if (currentLang === 'ko') {
+                slider.style.left = 'calc(50% - 3px)';
+                slider.style.width = 'calc(50% + 3px)';
+            } else {
+                slider.style.left = '3px';
+                slider.style.width = 'calc(50% - 3px)';
+            }
+        }
+        
+        // Add loading animation
+        function addLoadingAnimation() {
+            const cards = document.querySelectorAll('.day-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+            });
         }
         
         // Initialize
@@ -639,21 +1514,122 @@
                 btn.setAttribute('aria-pressed', btn.dataset.lang === currentLang ? 'true' : 'false');
             });
             
+            // Initialize language slider
+            initLangSlider();
+            
             // Initial render
             updateUIText();
             
+            // Add loading animations
+            setTimeout(addLoadingAnimation, 100);
+            
             // Event listeners
-            document.getElementById('tabsContainer').addEventListener('click', handleTabClick);
+            document.getElementById('countryPills').addEventListener('click', handleCountryClick);
             document.querySelector('.lang-toggle').addEventListener('click', handleLangToggle);
             document.querySelector('.share-btn').addEventListener('click', handleShare);
             
             // Handle deep links
             handleDeepLink();
             window.addEventListener('hashchange', handleDeepLink);
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    const pills = Array.from(document.querySelectorAll('.country-pill'));
+                    const currentIndex = pills.findIndex(p => p.classList.contains('active'));
+                    let newIndex = currentIndex;
+                    
+                    if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                        newIndex = currentIndex - 1;
+                    } else if (e.key === 'ArrowRight' && currentIndex < pills.length - 1) {
+                        newIndex = currentIndex + 1;
+                    }
+                    
+                    if (newIndex !== currentIndex) {
+                        pills[newIndex].click();
+                    }
+                }
+            });
+            
+            // Add touch swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    const pills = Array.from(document.querySelectorAll('.country-pill'));
+                    const currentIndex = pills.findIndex(p => p.classList.contains('active'));
+                    let newIndex = currentIndex;
+                    
+                    if (diff > 0 && currentIndex < pills.length - 1) {
+                        // Swiped left - go to next country
+                        newIndex = currentIndex + 1;
+                    } else if (diff < 0 && currentIndex > 0) {
+                        // Swiped right - go to previous country
+                        newIndex = currentIndex - 1;
+                    }
+                    
+                    if (newIndex !== currentIndex) {
+                        pills[newIndex].click();
+                    }
+                }
+            }
+            
+            // Add parallax effect on scroll
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const hero = document.querySelector('.hero');
+                    if (hero) {
+                        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                });
+            }
+            
+            // Add intersection observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all day cards
+            setTimeout(() => {
+                document.querySelectorAll('.day-card').forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    observer.observe(card);
+                });
+            }, 200);
         }
         
-        // Start app
-        document.addEventListener('DOMContentLoaded', init);
+        // Start app when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>

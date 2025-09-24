@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2025 Family Adventure</title>
-    <meta name="description" content="Sep 19 - Oct 17, 2025 • India, Vietnam, Taiwan, Singapore">
+    <meta name="description" content="Sep 20 - Oct 17, 2025 • India, Vietnam, Taiwan, Singapore">
     
     <style>
         * {
@@ -67,7 +67,7 @@
         .hero {
             background: var(--gradient-dark);
             color: var(--white);
-            padding: 60px 20px 40px;
+            padding: 40px 20px 30px;
             position: relative;
             overflow: hidden;
         }
@@ -83,16 +83,6 @@
             animation: float 20s ease-in-out infinite;
         }
         
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(180deg, transparent 0%, var(--off-white) 100%);
-        }
-        
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -103,38 +93,38 @@
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
         
         .hero-dates {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 100px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
         }
         
         .date-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: var(--primary);
         }
         
         .controls-bar {
             background: var(--white);
-            padding: 16px 20px;
+            padding: 12px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -155,9 +145,9 @@
         
         .country-pills {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             overflow-x: auto;
-            padding: 4px;
+            padding: 3px;
             background: var(--gray-light);
             border-radius: 100px;
             scrollbar-width: none;
@@ -168,12 +158,12 @@
         }
         
         .country-pill {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: transparent;
             border: none;
             border-radius: 100px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--gray-dark);
             white-space: nowrap;
@@ -184,22 +174,22 @@
         }
         
         .country-pill:hover {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         
         .country-pill.active {
             background: var(--gradient-primary);
             color: var(--white);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
         }
         
         .country-emoji {
-            font-size: 18px;
+            font-size: 16px;
         }
         
         .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
         }
         
@@ -207,17 +197,18 @@
             display: flex;
             background: var(--gray-light);
             border-radius: 100px;
-            padding: 3px;
+            padding: 2px;
             position: relative;
+            height: 36px;
         }
         
         .lang-toggle button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             border: none;
             background: transparent;
             cursor: pointer;
             border-radius: 100px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--gray-dark);
             transition: var(--transition);
@@ -231,9 +222,9 @@
         
         .lang-toggle-slider {
             position: absolute;
-            top: 3px;
-            left: 3px;
-            height: calc(100% - 6px);
+            top: 2px;
+            left: 2px;
+            height: calc(100% - 4px);
             background: var(--gradient-primary);
             border-radius: 100px;
             transition: var(--transition);
@@ -241,17 +232,18 @@
         }
         
         .btn-action {
-            padding: 10px 20px;
+            height: 36px;
+            padding: 0 18px;
             background: var(--gradient-primary);
             color: var(--white);
             border: none;
             border-radius: 100px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
             text-decoration: none;
@@ -264,14 +256,53 @@
         }
         
         .btn-icon {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             fill: currentColor;
+        }
+        
+        /* Ultra-compact Stats Bar - Single Line */
+        .stats-bar {
+            background: var(--white);
+            padding: 12px 20px;
+            margin: 20px auto;
+            max-width: 1200px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: nowrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            font-weight: 500;
         }
         
         .main-content {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 24px auto;
             padding: 0 20px;
         }
         
@@ -288,8 +319,8 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 24px;
-            padding: 24px;
+            margin-bottom: 20px;
+            padding: 20px;
             background: var(--white);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
@@ -303,32 +334,33 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: var(--gradient-primary);
         }
         
         .country-flag {
-            font-size: 48px;
+            font-size: 40px;
             animation: pulse 2s ease-in-out infinite;
         }
         
         .country-info h2 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--dark-blue);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         
         .country-meta {
             color: var(--gray);
-            font-size: 14px;
+            font-size: 13px;
         }
         
+        /* Compact Route Map */
         .route-map-container {
             background: var(--white);
             border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 32px;
+            padding: 18px;
+            margin-bottom: 24px;
             box-shadow: var(--shadow);
         }
         
@@ -336,29 +368,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
         .route-map-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--dark-blue);
         }
         
         .route-map {
             position: relative;
-            background: linear-gradient(to bottom, #f0f4f8 0%, #e8ecef 100%);
+            background: linear-gradient(to bottom, #f5f7fa 0%, #e8ecef 100%);
             border-radius: var(--radius);
-            padding: 30px;
-            min-height: 200px;
+            padding: 20px;
+            min-height: 120px;
         }
         
         .route-line {
             position: absolute;
             top: 50%;
-            left: 30px;
-            right: 30px;
-            height: 3px;
+            left: 25px;
+            right: 25px;
+            height: 2px;
             background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
             transform: translateY(-50%);
             z-index: 1;
@@ -376,18 +408,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             cursor: pointer;
             transition: var(--transition);
+            max-width: 70px;
         }
         
         .city-stop:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         
         .city-marker {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background: var(--white);
             border: 3px solid var(--primary);
             border-radius: 50%;
@@ -396,21 +429,18 @@
             z-index: 3;
         }
         
-        .city-stop:first-child .city-marker {
+        .city-stop:first-child .city-marker,
+        .city-stop:last-child .city-marker {
             background: var(--primary);
         }
         
-        .city-stop:last-child .city-marker {
-            background: var(--primary-dark);
-        }
-        
         .city-label {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--dark-blue);
             text-align: center;
-            max-width: 80px;
             line-height: 1.2;
+            word-break: break-word;
         }
         
         .city-link {
@@ -425,8 +455,8 @@
         .days-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-bottom: 32px;
         }
         
         .day-card {
@@ -441,13 +471,13 @@
         }
         
         .day-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-6px) scale(1.02);
             box-shadow: var(--shadow-xl);
         }
         
         .day-card-header {
             background: var(--gradient-primary);
-            padding: 20px;
+            padding: 16px;
             position: relative;
             overflow: hidden;
         }
@@ -465,7 +495,7 @@
         
         .day-date {
             color: var(--white);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             margin-bottom: 4px;
             position: relative;
@@ -473,7 +503,7 @@
         
         .day-location {
             color: rgba(255, 255, 255, 0.95);
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 300;
             display: flex;
             align-items: center;
@@ -483,8 +513,8 @@
         }
         
         .location-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: currentColor;
             opacity: 0.9;
         }
@@ -493,79 +523,79 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 4px 8px;
+            padding: 3px 8px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             color: var(--white);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             transition: var(--transition);
         }
         
         .location-map-btn:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         
         .map-icon {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             fill: currentColor;
         }
         
         .day-card-body {
-            padding: 20px;
+            padding: 16px;
         }
         
         .activities-container {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         
         .section-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--gray);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .activity-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
         
         .activity-pill {
             background: var(--gradient-primary);
             color: var(--white);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 100px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         
         .activity-icon {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             fill: currentColor;
         }
         
         .detail-row {
-            padding: 12px 0;
+            padding: 10px 0;
             border-top: 1px solid var(--gray-light);
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 10px;
         }
         
         .detail-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: var(--primary);
             flex-shrink: 0;
             margin-top: 2px;
@@ -576,18 +606,18 @@
         }
         
         .detail-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--gray);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         
         .detail-text {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--dark-blue);
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         .detail-text a {
@@ -602,43 +632,6 @@
             border-bottom-color: var(--primary);
         }
         
-        .stats-bar {
-            background: var(--white);
-            padding: 32px 20px;
-            margin: 40px 0;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
-        }
-        
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
-            text-align: center;
-        }
-        
-        .stat-item {
-            position: relative;
-        }
-        
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: var(--gray);
-            font-weight: 500;
-        }
-        
         .toast {
             position: fixed;
             bottom: 24px;
@@ -646,16 +639,16 @@
             transform: translateX(-50%) translateY(100px);
             background: var(--gradient-dark);
             color: var(--white);
-            padding: 16px 24px;
+            padding: 14px 20px;
             border-radius: 100px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             opacity: 0;
             transition: var(--transition);
             z-index: 200;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             box-shadow: var(--shadow-xl);
         }
         
@@ -665,16 +658,16 @@
         }
         
         .toast-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: var(--primary);
         }
         
         footer {
             background: var(--gradient-dark);
             color: var(--white);
-            padding: 40px 20px;
-            margin-top: 80px;
+            padding: 30px 20px;
+            margin-top: 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -692,7 +685,7 @@
         }
         
         .footer-content {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -701,45 +694,52 @@
         .footer-title {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
         
-        .footer-text {
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            background: rgba(28, 207, 201, 0.2);
+            text-decoration: none;
             font-size: 14px;
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-        
-        .footer-divider {
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            margin: 20px auto;
+            font-weight: 500;
+            padding: 10px 20px;
             border-radius: 100px;
+            transition: var(--transition);
+            margin: 8px 0;
         }
         
-        .disclaimer {
-            margin-top: 8px;
-            font-style: italic;
+        .footer-link:hover {
+            background: rgba(28, 207, 201, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .pdf-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
         }
         
         @media (max-width: 768px) {
             .hero {
-                padding: 40px 16px 30px;
+                padding: 30px 16px 24px;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
             
             .controls-bar {
-                padding: 12px 16px;
+                padding: 10px 16px;
             }
             
             .controls-container {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 12px;
+                gap: 10px;
             }
             
             .country-pills {
@@ -752,22 +752,35 @@
                 justify-content: space-between;
             }
             
+            .stats-container {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .stat-item {
+                min-width: auto;
+            }
+            
+            .stat-number {
+                font-size: 18px;
+            }
+            
             .route-map-container {
-                padding: 16px;
+                padding: 14px;
             }
             
             .route-map {
-                padding: 20px 10px;
+                padding: 16px 8px;
                 overflow-x: auto;
             }
             
             .route-cities {
-                min-width: 600px;
+                min-width: 500px;
             }
             
             .city-label {
-                font-size: 11px;
-                max-width: 60px;
+                font-size: 10px;
+                max-width: 50px;
             }
             
             .days-grid {
@@ -824,7 +837,7 @@
         </div>
     </nav>
     
-    <!-- Statistics Bar -->
+    <!-- Ultra-Compact Statistics Bar (Single Line) -->
     <div class="stats-bar">
         <div class="stats-container">
             <div class="stat-item">
@@ -849,17 +862,19 @@
     <!-- Main Content -->
     <main class="main-content" id="mainContent"></main>
     
-    <!-- Footer -->
+    <!-- Footer with PDF Link Only -->
     <footer>
         <div class="footer-content">
             <div class="footer-title" data-i18n="footerTitle">Travel Information</div>
-            <div class="footer-divider"></div>
-            <p class="footer-text" data-i18n="footerSources">
-                Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore
-            </p>
-            <p class="footer-text disclaimer" data-i18n="disclaimer">
-                All dates, activities, and accommodations are subject to confirmation.
-            </p>
+            <a href="https://drive.google.com/file/d/17MaPB7m2Ku7QieJrbJhrejaSaDWsds3p/view?usp=drive_link" target="_blank" rel="noopener" class="footer-link">
+                <svg class="pdf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14,2 14,8 20,8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span data-i18n="viewItinerary">View Complete Itinerary (PDF)</span>
+            </a>
         </div>
     </footer>
     
@@ -893,8 +908,7 @@
                 notes: "Notes",
                 linkCopied: "Link copied to clipboard!",
                 footerTitle: "Travel Information",
-                footerSources: "Sources: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore",
-                disclaimer: "All dates, activities, and accommodations are subject to confirmation.",
+                viewItinerary: "View Complete Itinerary (PDF)",
                 routeMap: "Route Map",
                 viewMap: "Map",
                 countries: { 
@@ -918,8 +932,7 @@
                 notes: "메모",
                 linkCopied: "링크가 클립보드에 복사되었습니다!",
                 footerTitle: "여행 정보",
-                footerSources: "출처: 2025 Family Trip Simple • 2025 India Vietnam Taiwan Singapore",
-                disclaimer: "모든 날짜, 활동 및 숙소는 확정되어야 합니다.",
+                viewItinerary: "전체 일정표 보기 (PDF)",
                 routeMap: "경로 지도",
                 viewMap: "지도",
                 countries: { 
@@ -944,272 +957,272 @@
                 "Delhi": "델리", "Agra": "아그라", "Haridwar": "하리드와르", "Rishikesh": "리시케시",
                 "Hanoi": "하노이", "Halong Bay": "하롱베이", "Hoi An": "호이안", "Danang": "다낭",
                 "Ho Chi Minh": "호치민", "Jiufen": "지우펀", "Taipei": "타이베이", "Alishan": "아리산",
-                "Chiayi": "자이", "Taoyuan": "타오위안", "Singapore": "싱가포르", "Sydney": "시드니",
+                "Chiayi": "쟈이", "Taoyuan": "타오위안", "Singapore": "싱가포르", "Sydney": "시드니",
                 "Bai Tu Long Bay": "바이뚜롱베이"
             }
         };
 
-        // Complete itinerary data with all corrections
+        // Complete itinerary data
         const itinerary = {
-  trips: [
-    {
-      country: "India",
-      emoji: "🇮🇳",
-      segments: [
-        {
-          date: "2025-09-19",
-          city: "Sydney",
-          activities: [],
-          transport: "SYD–SIN Scoot TR3 (12:50–19:15)",
-          lodging: "On flight",
-          notes: ""
-        },
-        {
-          date: "2025-09-20",
-          city: "Delhi → Agra",
-          activities: ["Check in", "Taj Mahal or Mehtab Bagh sunset / bicycle"],
-          transport: "SIN–DEL Air India AI2383 (23:00–02:20) • New Delhi → Agra 12002 Shatabdi (06:00–07:50)",
-          lodging: "<a href='https://www.booking.com/hotel/in/aman-homestay.en-gb.html' target='_blank' rel='noopener'>Aman Homestay</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-21",
-          city: "Agra → Delhi → Haridwar",
-          activities: ["Taj Mahal sunrise 06:00–09:00", "Breakfast + check out"],
-          transport: "Agra Cantt → Hazrat Nizamuddin 20171 Vande Bharat (11:05–13:16) • New Delhi → Haridwar 12055 Jan Shatabdi (15:20–19:33)",
-          lodging: "<a href='https://www.booking.com/hotel/in/le-roi-haridwar.en-gb.html' target='_blank' rel='noopener'>Hotel Le Roi Haridwar</a>",
-          notes: "Book food for Delhi → Haridwar"
-        },
-        {
-          date: "2025-09-22",
-          city: "Haridwar → Rishikesh",
-          activities: ["Har Ki Pauri? • Moti Bazaar?", "Transfer to Rishikesh", "Evening Aarti at Parmarth Niketan or Triveni Ghat"],
-          transport: "Local transfer Haridwar → Rishikesh",
-          lodging: "<a href='https://www.booking.com/hotel/in/hill-top-swiss-cottage.en-gb.html' target='_blank' rel='noopener'>Hilltop Swiss Cottage</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-23",
-          city: "Rishikesh",
-          activities: ["Yoga classes", "Neer Garh Waterfall", "Lakshman Jhula Bridge"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/in/hill-top-swiss-cottage.en-gb.html' target='_blank' rel='noopener'>Hilltop Swiss Cottage</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-24",
-          city: "Rishikesh",
-          activities: ["Yoga classes", "Beatles Ashram"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/in/hill-top-swiss-cottage.en-gb.html' target='_blank' rel='noopener'>Hilltop Swiss Cottage</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-25",
-          city: "Rishikesh → Delhi",
-          activities: ["Rishikesh → Delhi 05:35–11:45 (18478 Kalinga Utkal Express)", "Amin Tours pickup 13:00 at Hazrat Nizamuddin, drop at Delhi Airport"],
-          transport: "18478 Kalinga Utkal Express (05:35–11:45) • Amin Tours 13:00 pickup",
-          lodging: "Airport transit",
-          notes: ""
-        }
-      ]
-    },
-    {
-      country: "Vietnam",
-      emoji: "🇻🇳",
-      segments: [
-        {
-          date: "2025-09-26",
-          city: "Hanoi",
-          activities: ["Money at airport • Arrange transfer to cruise", "Train Street (check schedule)"],
-          transport: "DEL–HAN VietJet VJ972 (00:05–05:40)",
-          lodging: "<a href='https://www.booking.com/hotel/vn/3-bedroom-apartment-rooftop-lakeview-by-label6.en-gb.html' target='_blank' rel='noopener'>Crescendo Apt Quang Khanh</a>",
-          notes: "Family (from Korea) flight KE0453 18:45–21:35 to Hanoi"
-        },
-        {
-          date: "2025-09-27",
-          city: "Hanoi",
-          activities: ["Rest day in Hanoi", "Old Quarter, St Joseph Cathedral"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/3-bedroom-apartment-rooftop-lakeview-by-label6.en-gb.html' target='_blank' rel='noopener'>Crescendo Apt Quang Khanh</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-28",
-          city: "Halong Bay",
-          activities: ["Go to Halong", "Board Signature Halong Cruise", "Depart Halong International Port 11:45 (Booking 5660010758)"],
-          transport: "Transfer Hanoi → Halong International Port",
-          lodging: "<a href='https://www.booking.com/hotel/vn/signature-halong-cruise.en-gb.html' target='_blank' rel='noopener'>Signature Halong Cruise</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-29",
-          city: "Bai Tu Long Bay",
-          activities: ["On cruise"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/signature-halong-cruise.en-gb.html' target='_blank' rel='noopener'>Signature Halong Cruise</a>",
-          notes: ""
-        },
-        {
-          date: "2025-09-30",
-          city: "Halong → Hanoi → Danang",
-          activities: ["Arrive Halong International Port 11:00", "Go to Hanoi Railway Station", "Board SE3 overnight 19:20 (PNR 3629E9)"],
-          transport: "SE3 Hanoi → Danang (dep 19:20)",
-          lodging: "On train",
-          notes: ""
-        },
-        {
-          date: "2025-10-01",
-          city: "Danang → Hoi An",
-          activities: ["Arrive Danang Station 10:36", "Get cash", "Check in Hoi An 14:00"],
-          transport: "SE3 arrival 10:36 → transfer to Hoi An",
-          lodging: "<a href='https://www.booking.com/hotel/vn/zest-villas-amp-spa.en-gb.html' target='_blank' rel='noopener'>Zest Resort & Spa Hoi An</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-02",
-          city: "Hoi An",
-          activities: ["Relax in resort", "Hoi An Old Town?"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/zest-villas-amp-spa.en-gb.html' target='_blank' rel='noopener'>Zest Resort & Spa Hoi An</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-03",
-          city: "Hoi An",
-          activities: ["Relax in resort", "Hoi An Old Town?"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/zest-villas-amp-spa.en-gb.html' target='_blank' rel='noopener'>Zest Resort & Spa Hoi An</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-04",
-          city: "Danang",
-          activities: ["Transfer to new hotel 15:00 check-in", "Han Market • Dragon Bridge fire show • Beach?"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/sense-villa-da-nang-ngu-hanh-son.en-gb.html' target='_blank' rel='noopener'>Sense Villa by Enspired Vietnam</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-05",
-          city: "Danang",
-          activities: ["Marble Mountains?", "Son Tra (Lady Buddha)?", "Relax in Danang"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/sense-villa-da-nang-ngu-hanh-son.en-gb.html' target='_blank' rel='noopener'>Sense Villa by Enspired Vietnam</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-06",
-          city: "Danang",
-          activities: ["Sun World Ba Na Hills? • Golden Bridge?"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/vn/sense-villa-da-nang-ngu-hanh-son.en-gb.html' target='_blank' rel='noopener'>Sense Villa by Enspired Vietnam</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-07",
-          city: "Danang → Ho Chi Minh",
-          activities: ["Pack up", "Vincom Mega Mall"],
-          transport: "DAD–SGN VietJet VJ649 (15:20–16:40)",
-          lodging: "<a href='https://www.booking.com/hotel/vn/lumiere-horizon-suites.en-gb.html' target='_blank' rel='noopener'>Lumier Horizon Suites</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-08",
-          city: "Ho Chi Minh",
-          activities: ["Nguyen Hue Street (Cafe Apartment)", "Tan Dinh Church (pink church)"],
-          transport: "SGN–TPE VietJet VJ840 (00:15–04:55) next day",
-          lodging: "",
-          notes: "Family SGN–ICN Korean Air KE0476 (23:45–07:00)"
-        }
-      ]
-    },
-    {
-      country: "Taiwan",
-      emoji: "🇹🇼",
-      segments: [
-        {
-          date: "2025-10-09",
-          city: "Taipei → Jiufen",
-          activities: ["Jiufen – Shenao Fishing Port – Keelung", "15:00 check-in", "Night market: Keelung Miaokou"],
-          transport: "SGN–TPE VietJet VJ840 (00:15–04:55)",
-          lodging: "<a href='https://www.booking.com/hotel/tw/hui-ming-min-su-hai-jing-guan.en-gb.html' target='_blank' rel='noopener'>山刻雲在民房</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-10",
-          city: "Jiufen → Taipei",
-          activities: ["Guanghua Digital Plaza", "Syntrend Creative Park", "15:00 check-in", "Night markets: Liaoning St • Shilin • Raohe St"],
-          transport: "Jiufen → Taipei",
-          lodging: "<a href='https://www.booking.com/hotel/tw/flopflophostel-garden.en-gb.html' target='_blank' rel='noopener'>OwlStay FlipFlop Hostel Garden</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-11",
-          city: "Taipei",
-          activities: ["Daan Forest Park • Riverside Park • Yongkang St", "Night markets: Liaoning St / Shida / Linjiang St"],
-          transport: "",
-          lodging: "<a href='https://www.booking.com/hotel/tw/flopflophostel-garden.en-gb.html' target='_blank' rel='noopener'>OwlStay FlipFlop Hostel Garden</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-12",
-          city: "Taipei → Chiayi → Alishan",
-          activities: ["HSR Taipei 10:11 → Chiayi 11:54 (car 5 seats 16E/D 07628987)", "Taiwan Tourist Shuttle 13:10–15:40 #7329 (T3863785) to Alishan"],
-          transport: "HSR + Taiwan Tourist Shuttle 7329",
-          lodging: "<a href='https://www.booking.com/hotel/tw/gau-shan-ching-hotel.en-gb.html' target='_blank' rel='noopener'>高山青大飯店</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-13",
-          city: "Alishan → Chiayi",
-          activities: ["日出", "11:00 check out", "夜市：嘉義文化"],
-          transport: "🚐 15:10-17:40 台灣好行 阿里山-嘉義火車站7322 (T3863803)",
-          lodging: "<a href='https://www.booking.com/hotel/tw/cheng-yi-qing-lu-jia-yi-guan.en-gb.html' target='_blank' rel='noopener'>Light Hostel</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-14",
-          city: "Chiayi → Taoyuan",
-          activities: ["桃園神社 忠烈祠步道", "夜市：桃園觀光"],
-          transport: "HSR Chiayi → Taoyuan",
-          lodging: "On flight",
-          notes: ""
-        }
-      ]
-    },
-    {
-      country: "Singapore",
-      emoji: "🇸🇬",
-      segments: [
-        {
-          date: "2025-10-15",
-          city: "Singapore",
-          activities: ["Arrive Singapore", "City day"],
-          transport: "01:05-05:25 4.5 hours Scoot TR897 (IH32PE)",
-          lodging: "<a href='https://www.booking.com/hotel/sg/cube-boutique-capsule-at-boat-quay.en-gb.html' target='_blank' rel='noopener'>Cube Social Boutique Capsule Hotel</a>",
-          notes: ""
-        },
-        {
-          date: "2025-10-16",
-          city: "Singapore",
-          activities: ["City day"],
-          transport: "",
-          lodging: "On flight",
-          notes: ""
-        },
-        {
-          date: "2025-10-17",
-          city: "Singapore → Sydney",
-          activities: ["Arrive home"],
-          transport: "SIN–SYD Scoot TR2 (02:00–12:35)",
-          lodging: "Home Sweet Home",
-          notes: ""
-        }
-      ]
-    }
-  ]
-};
+            trips: [
+                {
+                    country: "India",
+                    emoji: "🇮🇳",
+                    segments: [
+                        {
+                            date: "2025-09-19",
+                            city: "Sydney",
+                            activities: [],
+                            transport: "SYD—SIN Scoot TR3 (12:50—19:15)",
+                            lodging: "On flight",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-20",
+                            city: "Delhi → Agra",
+                            activities: ["Check in", "Taj Mahal or Mehtab Bagh sunset / bicycle"],
+                            transport: "SIN—DEL Air India AI2383 (23:00—02:20) • New Delhi → Agra 12002 Shatabdi (06:00—07:50)",
+                            lodging: "<a href='https://www.booking.com/hotel/in/aman-homestay.en-gb.html' target='_blank' rel='noopener'>Aman Homestay</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-21",
+                            city: "Agra → Delhi → Haridwar",
+                            activities: ["Taj Mahal sunrise 06:00—09:00", "Breakfast + check out"],
+                            transport: "Agra Cantt → Hazrat Nizamuddin 20171 Vande Bharat (11:05—13:16) • New Delhi → Haridwar 12055 Jan Shatabdi (15:20—19:33)",
+                            lodging: "<a href='https://www.booking.com/hotel/in/le-roi-haridwar.en-gb.html' target='_blank' rel='noopener'>Hotel Le Roi Haridwar</a>",
+                            notes: "Book food for Delhi → Haridwar"
+                        },
+                        {
+                            date: "2025-09-22",
+                            city: "Haridwar → Rishikesh",
+                            activities: ["Har Ki Pauri? • Moti Bazaar?", "Transfer to Rishikesh", "Evening Aarti at Parmarth Niketan or Triveni Ghat"],
+                            transport: "Local transfer Haridwar → Rishikesh",
+                            lodging: "<a href='https://www.booking.com/hotel/in/hill-top-swiss-cottage.en-gb.html' target='_blank' rel='noopener'>Hilltop Swiss Cottage</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-23",
+                            city: "Rishikesh",
+                            activities: ["Yoga classes", "Neer Garh Waterfall", "Lakshman Jhula Bridge"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/in/hill-top-swiss-cottage.en-gb.html' target='_blank' rel='noopener'>Hilltop Swiss Cottage</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-24",
+                            city: "Rishikesh",
+                            activities: ["Yoga classes", "Beatles Ashram"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/in/hill-top-swiss-cottage.en-gb.html' target='_blank' rel='noopener'>Hilltop Swiss Cottage</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-25",
+                            city: "Rishikesh → Delhi",
+                            activities: ["Rishikesh → Delhi 05:35—11:45 (18478 Kalinga Utkal Express)", "Amin Tours pickup 13:00 at Hazrat Nizamuddin, drop at Delhi Airport"],
+                            transport: "18478 Kalinga Utkal Express (05:35—11:45) • Amin Tours 13:00 pickup",
+                            lodging: "Airport transit",
+                            notes: ""
+                        }
+                    ]
+                },
+                {
+                    country: "Vietnam",
+                    emoji: "🇻🇳",
+                    segments: [
+                        {
+                            date: "2025-09-26",
+                            city: "Hanoi",
+                            activities: ["Money at airport • Arrange transfer to cruise", "Train Street (check schedule)"],
+                            transport: "DEL—HAN VietJet VJ972 (00:05—05:40)",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/3-bedroom-apartment-rooftop-lakeview-by-label6.en-gb.html' target='_blank' rel='noopener'>Crescendo Apt Quang Khanh</a>",
+                            notes: "Family (from Korea) flight KE0453 18:45—21:35 to Hanoi"
+                        },
+                        {
+                            date: "2025-09-27",
+                            city: "Hanoi",
+                            activities: ["Rest day in Hanoi", "Old Quarter, St Joseph Cathedral"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/3-bedroom-apartment-rooftop-lakeview-by-label6.en-gb.html' target='_blank' rel='noopener'>Crescendo Apt Quang Khanh</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-28",
+                            city: "Halong Bay",
+                            activities: ["Go to Halong", "Board Signature Halong Cruise", "Depart Halong International Port 11:45 (Booking 5660010758)"],
+                            transport: "Transfer Hanoi → Halong International Port",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/signature-halong-cruise.en-gb.html' target='_blank' rel='noopener'>Signature Halong Cruise</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-29",
+                            city: "Bai Tu Long Bay",
+                            activities: ["On cruise"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/signature-halong-cruise.en-gb.html' target='_blank' rel='noopener'>Signature Halong Cruise</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-09-30",
+                            city: "Halong → Hanoi → Danang",
+                            activities: ["Arrive Halong International Port 11:00", "Go to Hanoi Railway Station", "Board SE3 overnight 19:20 (PNR 3629E9)"],
+                            transport: "SE3 Hanoi → Danang (dep 19:20)",
+                            lodging: "On train",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-01",
+                            city: "Danang → Hoi An",
+                            activities: ["Arrive Danang Station 10:36", "Get cash", "Check in Hoi An 14:00"],
+                            transport: "SE3 arrival 10:36 → transfer to Hoi An",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/zest-villas-amp-spa.en-gb.html' target='_blank' rel='noopener'>Zest Resort & Spa Hoi An</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-02",
+                            city: "Hoi An",
+                            activities: ["Relax in resort", "Hoi An Old Town?"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/zest-villas-amp-spa.en-gb.html' target='_blank' rel='noopener'>Zest Resort & Spa Hoi An</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-03",
+                            city: "Hoi An",
+                            activities: ["Relax in resort", "Hoi An Old Town?"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/zest-villas-amp-spa.en-gb.html' target='_blank' rel='noopener'>Zest Resort & Spa Hoi An</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-04",
+                            city: "Danang",
+                            activities: ["Transfer to new hotel 15:00 check-in", "Han Market • Dragon Bridge fire show • Beach?"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/sense-villa-da-nang-ngu-hanh-son.en-gb.html' target='_blank' rel='noopener'>Sense Villa by Enspired Vietnam</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-05",
+                            city: "Danang",
+                            activities: ["Marble Mountains?", "Son Tra (Lady Buddha)?", "Relax in Danang"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/sense-villa-da-nang-ngu-hanh-son.en-gb.html' target='_blank' rel='noopener'>Sense Villa by Enspired Vietnam</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-06",
+                            city: "Danang",
+                            activities: ["Sun World Ba Na Hills? • Golden Bridge?"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/sense-villa-da-nang-ngu-hanh-son.en-gb.html' target='_blank' rel='noopener'>Sense Villa by Enspired Vietnam</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-07",
+                            city: "Danang → Ho Chi Minh",
+                            activities: ["Pack up", "Vincom Mega Mall"],
+                            transport: "DAD—SGN VietJet VJ649 (15:20—16:40)",
+                            lodging: "<a href='https://www.booking.com/hotel/vn/lumiere-horizon-suites.en-gb.html' target='_blank' rel='noopener'>Lumier Horizon Suites</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-08",
+                            city: "Ho Chi Minh",
+                            activities: ["Nguyen Hue Street (Cafe Apartment)", "Tan Dinh Church (pink church)"],
+                            transport: "SGN—TPE VietJet VJ840 (00:15—04:55) next day",
+                            lodging: "",
+                            notes: "Family SGN—ICN Korean Air KE0476 (23:45—07:00)"
+                        }
+                    ]
+                },
+                {
+                    country: "Taiwan",
+                    emoji: "🇹🇼",
+                    segments: [
+                        {
+                            date: "2025-10-09",
+                            city: "Taipei → Jiufen",
+                            activities: ["Jiufen – Shenao Fishing Port – Keelung", "15:00 check-in", "Night market: Keelung Miaokou"],
+                            transport: "SGN—TPE VietJet VJ840 (00:15—04:55)",
+                            lodging: "<a href='https://www.booking.com/hotel/tw/hui-ming-min-su-hai-jing-guan.en-gb.html' target='_blank' rel='noopener'>山刻雲在民房</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-10",
+                            city: "Jiufen → Taipei",
+                            activities: ["Guanghua Digital Plaza", "Syntrend Creative Park", "15:00 check-in", "Night markets: Liaoning St • Shilin • Raohe St"],
+                            transport: "Jiufen → Taipei",
+                            lodging: "<a href='https://www.booking.com/hotel/tw/flopflophostel-garden.en-gb.html' target='_blank' rel='noopener'>OwlStay FlipFlop Hostel Garden</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-11",
+                            city: "Taipei",
+                            activities: ["Daan Forest Park • Riverside Park • Yongkang St", "Night markets: Liaoning St / Shida / Linjiang St"],
+                            transport: "",
+                            lodging: "<a href='https://www.booking.com/hotel/tw/flopflophostel-garden.en-gb.html' target='_blank' rel='noopener'>OwlStay FlipFlop Hostel Garden</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-12",
+                            city: "Taipei → Chiayi → Alishan",
+                            activities: ["HSR Taipei 10:11 → Chiayi 11:54 (car 5 seats 16E/D 07628987)", "Taiwan Tourist Shuttle 13:10—15:40 #7329 (T3863785) to Alishan"],
+                            transport: "HSR + Taiwan Tourist Shuttle 7329",
+                            lodging: "<a href='https://www.booking.com/hotel/tw/gau-shan-ching-hotel.en-gb.html' target='_blank' rel='noopener'>高山青大飯店</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-13",
+                            city: "Alishan → Chiayi",
+                            activities: ["日出", "11:00 check out", "夜市：嘉義文化"],
+                            transport: "🚌 15:10-17:40 台灣好行 阿里山-嘉義火車站7322 (T3863803)",
+                            lodging: "<a href='https://www.booking.com/hotel/tw/cheng-yi-qing-lu-jia-yi-guan.en-gb.html' target='_blank' rel='noopener'>Light Hostel</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-14",
+                            city: "Chiayi → Taoyuan",
+                            activities: ["桃園神社 忠烈祠 步道", "夜市：桃園觀光"],
+                            transport: "HSR Chiayi → Taoyuan",
+                            lodging: "On flight",
+                            notes: ""
+                        }
+                    ]
+                },
+                {
+                    country: "Singapore",
+                    emoji: "🇸🇬",
+                    segments: [
+                        {
+                            date: "2025-10-15",
+                            city: "Singapore",
+                            activities: ["Arrive Singapore", "City day"],
+                            transport: "01:05-05:25 4.5 hours Scoot TR897 (IH32PE)",
+                            lodging: "<a href='https://www.booking.com/hotel/sg/cube-boutique-capsule-at-boat-quay.en-gb.html' target='_blank' rel='noopener'>Cube Social Boutique Capsule Hotel</a>",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-16",
+                            city: "Singapore",
+                            activities: ["City day"],
+                            transport: "",
+                            lodging: "On flight",
+                            notes: ""
+                        },
+                        {
+                            date: "2025-10-17",
+                            city: "Singapore → Sydney",
+                            activities: ["Arrive home"],
+                            transport: "SIN—SYD Scoot TR2 (02:00—12:35)",
+                            lodging: "Home Sweet Home",
+                            notes: ""
+                        }
+                    ]
+                }
+            ]
+        };
 
         // Utility functions
         function formatDate(dateStr, lang = 'en') {
@@ -1479,7 +1492,7 @@
                 
                 if (isActive) {
                     slider.style.width = `${btn.offsetWidth}px`;
-                    slider.style.transform = `translateX(${btn.offsetLeft - 3}px)`;
+                    slider.style.transform = `translateX(${btn.offsetLeft - 2}px)`;
                 }
             });
         }
